@@ -1,0 +1,45 @@
+<h2>Listing users</h2>
+
+<%= link_to 'New user', new_user_path %><%= link_to 'Back', root_path, :class => "pull-right" %><br/><br/>
+
+<div class="well well-lg">
+  <!-- Table -->
+  <table class="table">
+
+    <tr>
+      <th>First Name</th>
+      <th>Last Name</th>
+      <th>Age</th>
+      <th>Sex</th>
+      <th>Phone</th>
+      <th>Email</th>
+      <th>Created by</th>
+      <th>Actions</th>
+    </tr>
+    <% @users.each do |user| %>
+      <tr>
+        <td><%= user.user_detail.first_name %></td>
+        <td><%= user.user_detail.last_name %></td>
+        <td><%= user.user_detail.age %></td>
+        <td><%= user.user_detail.sex %></td>
+        <td><%= user.user_detail.phone %></td>
+        <td><%= user.email %></td>
+    
+        <% if user.admin %>
+          <td><%= "Admin" %></td>
+        <% else %>
+          <td><%= "User" %></td>
+        <% end %>
+
+        <% if current_user.admin? %>  
+          <td><%= link_to 'Show', user %></td>
+          <td><%= link_to 'Edit', edit_user_path(user) %></td>
+          <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %>
+          </td>
+        <% end %>
+      </tr>    
+    <% end %>
+  </table>
+</div>
+
+

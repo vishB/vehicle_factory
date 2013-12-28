@@ -1,0 +1,68 @@
+<div class="well well-sm">
+  <%= form_for(@vehicle, :html => {:class => "container"}) do |f| %>
+    <% if @vehicle.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@vehicle.errors.count, "error") %> prohibited this vehicle from being saved:</h2>
+
+        <ul>
+          <% @vehicle.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="field">
+      <%= f.label :vehicle_type %>
+      <%= f.select :vehicle_type, @vehicle_types %>
+    </div><br />
+    <div>
+      <%= f.label :vehicle_engine %>
+      <%= f.select :engine_id, @engines%>
+    </div><br/>
+    <div>
+      <%= label_tag 'name', 'Power'%>
+      <%= text_field_tag :power, nil, :disabled => true %>
+    </div><br/>
+    <div class="field" id="occupants">
+      <%= f.label :occupants %>
+      <%= f.number_field :occupants %>
+    </div><br />
+    <div class="field" id="payload_weight">
+      <%= f.label :payload_weight_in_kgs %>
+      <%= f.text_field :payload_weight %>
+    </div><br />
+    <div class="field">
+      <%= f.label :vehicle_identifier %>
+      <%= f.number_field :v_identifier, :maxlength => 4, :placeholder => "(Four digit number only)" %>
+    </div><br />
+    <%= f.fields_for :construction do |ff| %>
+      <div id="datetimepicker1" class="input-append date">
+        <%= ff.label :start_date %>
+        <%#= ff.text_field :start_date%>
+        <input data-format="dd/MM/yyyy hh:mm:ss" type="text" size="30" name="vehicle[construction_attributes][start_date]" id="vehicle_construction_attributes_start_date">
+        <span class="add-on">
+          <i data-time-icon="icon-time" data-date-icon="icon-calendar">
+          </i>
+        </span>
+      </div><br/>
+
+      <div id="datetimepicker2" class="input-append date">
+        <%= ff.label :delivery_date %>
+        <%#= ff.date_select :delivery_date %>
+        <input data-format="dd/MM/yyyy hh:mm:ss" type="text" size="30" name="vehicle[construction_attributes][delivery_date]" id="vehicle_construction_attributes_delivery_date">
+        <span class="add-on">
+          <i data-time-icon="icon-time" data-date-icon="icon-calendar">
+          </i>
+        </span>
+      </div><br/>
+    <% end %>
+    <div class="actions">
+      <%= f.submit %>
+    </div>
+  <% end %>
+</div>
+
+
+
+

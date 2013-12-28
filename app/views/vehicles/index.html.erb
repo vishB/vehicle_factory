@@ -1,0 +1,32 @@
+<div class="container">
+  <% if user_signed_in? %>
+    <!-- Notifications  -->
+    <% if flash[:error] %>
+      <div class="alert alert-success" id="test">
+        <%=flash[:notice]%>
+      </div>
+    <% elsif notice %> 
+       <div class="alert alert-success" id="test">
+        <%= notice%>
+      </div>
+    <% end %>
+    <!-- Notifications  -->
+    
+    <div id="notification"></div>
+    
+    <h2>Listing vehicles</h2>
+    <% if current_user.admin? %>
+      <%= link_to 'New Vehicle', new_vehicle_path %> 
+    <% else %>    
+      <%= link_to 'Add more vehicles', more_vehicles_path(current_user),:class=>"btn btn-warning btn-lg active", :role => "button"%>
+    <% end %>
+    <%= link_to 'Back', root_path, :class => "pull-right btn btn-primary btn-lg active", :role =>"button" %><br/><br/>
+      
+      <!-- Table -->
+    <div class="well well-lg">
+      <div class="well-lg">
+        <%= render 'vehicles_list' %>
+      </div>  
+    </div>
+  <%end%>
+</div>

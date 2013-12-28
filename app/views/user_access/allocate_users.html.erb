@@ -1,0 +1,33 @@
+<h2>Allocate <%= @vehicle.first.vehicle_type %>-<%=  @vehicle.first.v_identifier %> to users</h2>
+
+<%= form_tag allocate_users_path do %>
+  <%=hidden_field_tag 'vehicle_id', @vehicle.first.id %>
+  <%=hidden_field_tag 'shared_by', current_user.id%>
+  <table>
+    <tr>
+      <th>Type</th>
+      <th>Occupants</th>
+      <th>Payload weight</th>
+      <th>Vehicle identifier</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+
+    <% @users.each do |user| %>  
+      <tr>
+        <% unless user.admin?%>
+          <td><%= user.user_detail.first_name %></td>
+          <td><%= user.user_detail.last_name %></td>
+          <td><%= user.user_detail.age %></td>
+          <td><%= user.user_detail.sex %></td>
+          <td><%= link_to 'Show', user %></td>
+          <td><%=check_box_tag("check#{user.id}", value = "#{user.id}", checked = false, 
+          options = {})%>
+          </td><br/> 
+        <% end %>
+      </tr>
+    <% end %>
+  </table><br/>
+  <%= submit_tag "Allocate"%><br />  
+<% end %>

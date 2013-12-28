@@ -1,0 +1,32 @@
+<h2>Listing engines</h2><br />
+<%= link_to 'New Engine', new_engine_path %>
+<%= link_to 'Back', root_path, :class => "pull-right" %><br/><br/>
+
+<div class="well well-lg">
+  <% unless @engines.blank? %>
+      <!-- Table -->  
+      <table class="table">
+        <tr>
+          <th>Power rating</th>
+          <th>Fuel type</th>
+          <th></th>
+          <th>Actions</th>
+          <th></th>
+        </tr>
+
+        <% @engines.each do |engine| %>
+          <tr>
+            <td><%= engine.power_rating %></td>
+            <td><%= engine.fuel.fuel_type %></td>
+            <td><%= link_to 'Show', engine %></td>
+            <td><%= link_to 'Edit', edit_engine_path(engine) %></td>
+            <td><%= link_to 'Destroy', engine, method: :delete, data: { confirm: 'Are you sure?' },:remote => true, :class => 'delete_engine' %></td>
+          </tr>
+        <% end %>
+      </table>
+  <% else %>    
+      <center>
+        <strong> No Engines created yet, please create one. </strong>
+      </center>
+  <% end %>
+</div>  

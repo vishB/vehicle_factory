@@ -1,0 +1,35 @@
+<h2>Listing User Details</h2>
+<%= link_to 'Back', root_path, :class => "pull-right" %><br/><br/>
+<div class="well well-lg">
+  <table class="table">
+    <tr>
+      <th>User</th>
+      <th>First name</th>
+      <th>Last name</th>
+      <th>Age</th>
+      <th>Sex</th>
+      <th>Email</th>
+      <th>Phone</th>
+      <th></th>
+      <th>Actions</th>
+      <th></th>
+    </tr>
+
+    <% @user_details.each do |user_detail| %>
+      <tr>
+        <td><%= user_detail.user_id %></td>
+        <td><%= user_detail.first_name %></td>
+        <td><%= user_detail.last_name %></td>
+        <td><%= user_detail.age %></td>
+        <td><%= user_detail.sex %></td>
+        <td><%= user_detail.email %></td>
+        <td><%= user_detail.phone %></td>
+        <td><%= link_to 'Show', user_detail %></td>
+        <td><%= link_to 'Edit', edit_user_detail_path(user_detail) %></td>
+        <td><%= link_to 'Destroy', user_detail, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </table>
+</div>  
+
+

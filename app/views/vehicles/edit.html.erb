@@ -1,0 +1,28 @@
+
+<div class="container">
+  <% if user_signed_in? %>
+    <!-- Notifications  -->
+    <% if flash[:error] %>
+      <div class="alert alert-success" id="test">
+        <%=flash[:notice]%>
+      </div>
+    <% elsif notice %> 
+       <div class="alert alert-success" id="test">
+        <%= notice%>
+      </div>
+    <% end %>
+    <!-- Notifications  -->
+    
+    <div id="notification"></div>
+    
+    <h2>Editing vehicle</h2>
+      <%= link_to 'Back', vehicles_path, :class => "pull-right btn btn-primary btn-lg active", :role =>"button" %><br/><br/>
+      
+      <!-- Table -->
+    <div class="well well-lg">
+      <div class="well-lg">
+        <%= render 'form' %>
+      </div>  
+    </div>
+  <%end%>
+</div>

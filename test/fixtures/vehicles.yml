@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  vehicle_type: 
+  occupants: 1
+  payload_weight: 1.5
+  v_identifier: 1
+
+two:
+  vehicle_type: 
+  occupants: 1
+  payload_weight: 1.5
+  v_identifier: 1

@@ -1,0 +1,21 @@
+<div class="alert alert-success" id="test">
+  <p id="notice"><%= notice %></p>
+</div>
+<p>
+  <b>Power rating:</b>
+  <%= @engine.power_rating %>
+</p>
+
+<p>
+  <b>Fuel Type:</b>
+  <%= @engine.fuel.fuel_type %>
+</p>
+
+<p>
+  <b>Model Number:</b>
+  <%= @engine.model %>
+</p>
+
+
+<%= link_to 'Edit', edit_engine_path(@engine) %> |
+<%= link_to 'Back', engines_path %>

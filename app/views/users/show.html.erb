@@ -1,0 +1,42 @@
+<% unless notice.blank? %>
+  <div class="alert alert-success" id="test">
+    <p id="notice"><%= notice %></p>
+  </div>
+<% end %> 
+<h2>My profile</h2>
+
+<% if user_signed_in? %>
+  <% if current_user.admin? %>
+    <%= link_to 'Back', users_path, :class=>"pull-right btn btn-primary btn-lg active", :role => "button"%>
+  <% else %>
+    <%= link_to 'Back', root_path, :class=>"pull-right btn btn-primary btn-lg active", :role => "button"%> 
+  <% end %>
+<% end %><br/><br/>     
+
+<div class="well well-lg">
+  <div class="well well-lg">
+    <div class="form-cover">
+      <h2><%= @user.user_detail.first_name %>&nbsp;<%= @user.user_detail.last_name %></h2>
+      <p>
+        <b>Age:</b>
+        <%= @user.user_detail.age %>
+      </p>
+
+      <p>
+        <b>Sex:</b>
+        <%= @user.user_detail.sex %>
+      </p>
+
+      <p>
+        <b>Phone:</b>
+        <%= @user.user_detail.phone %>
+      </p>
+
+      <p>
+        <b>Phone:</b>
+        <%= @user.email %>
+      </p>
+    </div>
+  </div>  
+    <%= link_to 'Edit', edit_user_path(@user),:class=>"pull-right btn btn-warning btn-lg active", :role => "button" %><br/>
+</div>

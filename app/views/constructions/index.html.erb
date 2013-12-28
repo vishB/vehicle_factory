@@ -1,0 +1,29 @@
+<h2>Listing vehicles construction details</h2><br/>
+  <%#= link_to 'New Construction', new_construction_path %>
+<div class="well well-sm">
+<table class="table">
+  <tr>
+    <th>Vehicle</th>
+    <th>Start date</th>
+    <th>Delivery date</th>
+    <th>User</th>
+    <th></th>
+    <th></th>
+  </tr>
+
+  <% @constructions.each do |construction| %>
+    <tr>
+      <td><%= construction.vehicle_id %></td>
+      <td><%= construction.start_date %></td>
+      <td><%= construction.delivery_date %></td>
+      <td><%= construction.user_id %></td>
+      <td><%= link_to 'Show', construction %></td>
+      <td><%= link_to 'Edit', edit_construction_path(construction) %></td>
+      <!-- <td><%#= link_to 'Destroy', construction, method: :delete, data: { confirm: 'Are you sure?' } %></td> -->
+    </tr>
+  <% end %>
+</table>
+
+
+
+

@@ -1,0 +1,76 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the top of the
+ * compiled file, but it's generally better to create a new file per style scope.
+ *
+ *= require_self
+ *= require_validation
+ *= require_tree .
+ */
+
+
+.login-cover{
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 225px;
+  border: 20px solid rgba(0, 0, 0, 0.3);
+}
+
+body {
+	height:700px;
+	background-image:url('/assets/space-shuttle.jpg');
+	background-repeat:no-repeat;
+	background-size: 100%;
+}
+
+.container h2 {color:#ffffff;}
+
+label.required:after{content:"*"}
+
+.got_error { color:red; }
+
+.form-cover{
+	margin-left:40px;
+	margin-top:40px;
+}
+
+.form-cover h2 { color:black;}
+
+.footer-center{
+	margin-left:auto;
+	margin-right:auto;
+	width:260px;
+}
+
+.block{
+	width:100px;
+	height:100px;
+	float:left;
+	padding:20px;
+}
+
+.admin-options{
+	height: 400px;
+    padding: 20px;
+    width: 96%;
+}
+
+.user-options{
+	height: 155px;
+    padding: 20px;
+    width: 96%;
+}
+
+.footer{
+	color: #FFFFFF;
+    margin-left: auto;
+    margin-right: auto;
+    width: 310px;
+}
+
+

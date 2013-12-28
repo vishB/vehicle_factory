@@ -1,0 +1,62 @@
+<%= render_breadcrumbs %>
+<!-- Vehicles Listing -->
+<div class="well well-sm">
+  <% unless @vehicles.blank?%>
+    <table class="table">
+      <tr>
+        <!-- <th>Type</th> -->
+        <!-- <th>Vehicle identifier</th> -->
+        <th>Vehicle</th>
+        <th>Occupants</th>
+        <th>Payload weight</th>
+        <th>Construction Start date</th>
+        <th>Construction Delivery date</th>
+        <th></th>
+        <th></th>
+        <th></th>
+      </tr>
+
+      <% @vehicles.each do |vehicle| %>
+        <tr>
+          <td><%= link_to "#{vehicle.vehicle_type}-#{vehicle.v_identifier}", vehicle %></td>
+          <!-- <td><%= vehicle.v_identifier %></td> -->
+          <% if vehicle.vehicle_type == "Shuttle"%>
+            <td><%= vehicle.occupants %></td>
+          <% else%>
+            <td>NA</td>
+          <% end %>
+          <% if vehicle.vehicle_type == "Satellite"%>
+            <td><%= vehicle.payload_weight %></td>
+          <% else%>
+            <td>NA</td>
+          <% end %>  
+          <td><%= vehicle.construction.start_date.to_date %></td>
+          <td><%= vehicle.construction.delivery_date.to_date %></td>
+          <td><%= link_to (image_tag("edit.ico")), edit_vehicle_path(vehicle) %></td>
+          <% if current_user.admin?%>
+            <td><%= link_to (image_tag("destroy.ico")), vehicle, method: :delete, data: 
+            { confirm: 'Are you sure?' }, :remote => true, :class => 'delete_vehicle' %>
+            </td>
+          <% else %>  
+            <td><%= link_to (image_tag("destroy.ico")), vehicle, method: :delete, data: 
+            { confirm: "Are you sure you want remove #{vehicle.vehicle_type}-#{vehicle.v_identifier} from you vehicles list ?" }, :remote => true, :class => 'delete_vehicle','data-type' => 'json' %></td>
+          <% end %>
+          <% if current_user.admin? %>
+            <td><%= link_to 'Allocate users', allocate_users_path(vehicle) %></td>
+          <% else %>      
+            <td><%= link_to (image_tag("share.ico",:width=>"24px",:height=>"24px")), share_vehicles_with_users_path(vehicle) %>
+            </td>
+          <%end%>      
+        </tr>
+      <% end %>
+    </table>
+  <% else %>
+    <div class="panel-body panel-warning">
+      <center>
+        <strong> No vehicles assigned yet, please add vehicle. </strong>
+      </center>
+    </div>
+  <% end %>
+</div>
+<!-- Vehicles Listing -->
+

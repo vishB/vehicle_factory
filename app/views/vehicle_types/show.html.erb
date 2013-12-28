@@ -1,0 +1,11 @@
+<div class="alert alert-success" id="test">
+	<p id="notice"><%= notice %></p>
+</div>
+<p>
+  <b>Kind:</b>
+  <%= @vehicle_type.kind %>
+</p>
+
+
+<%= link_to 'Edit', edit_vehicle_type_path(@vehicle_type) %> |
+<%= link_to 'Back', vehicle_types_path %>

@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  vehicle_id: 1
+  start_date: 2013-12-10 17:23:35
+  delivery_date: 2013-12-10 17:23:35
+  user_id: 1
+
+two:
+  vehicle_id: 1
+  start_date: 2013-12-10 17:23:35
+  delivery_date: 2013-12-10 17:23:35
+  user_id: 1

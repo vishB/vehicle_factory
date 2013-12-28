@@ -1,0 +1,41 @@
+<h2> Admin Settings </h2>
+<span class="label label-success">Choose an user to transfer admin privileges.</span>
+<%= link_to 'Back', root_path, :class => "pull-right" %><br/>
+<%= form_tag change_admin_users_path(:old_admin => current_user.id) do %>
+
+	<div class="well well-lg">
+	  <!-- Table -->
+	  <table class="table">
+	    <tr>
+	      <th>First Name</th>
+	      <th>Last Name</th>
+	      <th>Age</th>
+	      <th>Sex</th>
+	      <th>Phone</th>
+	      <th>Email</th>
+	      <th>Select</th>
+	      <th></th>
+	    </tr>
+	    <% @users.each do |user| %>
+	      <tr>
+	          <td><%= user.user_detail.first_name %></td>
+	          <td><%= user.user_detail.last_name %></td>
+	          <td><%= user.user_detail.age %></td>
+	          <td><%= user.user_detail.sex %></td>
+	          <td><%= user.user_detail.phone %></td>
+	          <td><%= user.email %></td>
+	        <% if user.admin %>
+	          <td><%=radio_button_tag 'user_id', user.id, true, 
+          options = {}%></td>
+	          <td><%= "Admin" %></td>
+	        <% else %>
+	          <td><%=radio_button_tag 'user_id', user.id, false, 
+          options = {}%></td>
+	          <td><%= "User" %></td>
+	        <% end %>  
+	      </tr>
+	    <% end %>
+	  </table>
+	</div>
+	<%= submit_tag 'Make Admin'%>
+<% end %>	

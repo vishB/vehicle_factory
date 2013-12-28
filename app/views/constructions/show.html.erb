@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Vehicle:</b>
+  <%= @construction.vehicle_id %>
+</p>
+
+<p>
+  <b>Start date:</b>
+  <%= @construction.start_date %>
+</p>
+
+<p>
+  <b>Delivery date:</b>
+  <%= @construction.delivery_date %>
+</p>
+
+<p>
+  <b>User:</b>
+  <%= @construction.user_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_construction_path(@construction) %> |
+<%= link_to 'Back', constructions_path %>

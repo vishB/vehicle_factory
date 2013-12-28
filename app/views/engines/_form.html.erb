@@ -1,0 +1,28 @@
+<%= form_for(@engine) do |f| %>
+  <% if @engine.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@engine.errors.count, "error") %> prohibited this engine from being saved:</h2>
+
+      <ul>
+      <% @engine.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :power_rating %><br />
+    <%= f.select :power_rating, 0..90 %>
+  </div>
+  <div class="field">
+    <%= f.hidden_field :model, :value => "ENG-M-#{Time.now.strftime("%G-W%V%u-T%H%M")}" %>
+  </div>
+  <div class="field">
+    <%= f.label :fuel_type %><br />
+    <%= f.select :fuel_id, @fuel_type %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

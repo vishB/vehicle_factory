@@ -1,0 +1,41 @@
+<% unless notice.blank?%>
+	<div class="alert alert-success" id="test">
+		<p id="notice"><%= notice %></p>
+	</div>
+<% end %>
+<h2><%= @vehicle.vehicle_type %>-<%= @vehicle.v_identifier %></h2>
+<%= link_to 'Back', vehicles_path, :class => "pull-right btn btn-primary btn-lg active", :role =>"button" %><br/><br/>
+<div class="well well-sm">
+	<div class="well well-sm">	
+		<p>
+		  <b>Vehicle Type:</b>
+		  <%= @vehicle.vehicle_type %>
+		</p>
+
+		<% if @vehicle.vehicle_type == "Shuttle" %>
+			<p>
+			  <b>Occupants:</b>
+			  <%= @vehicle.occupants %>
+			</p>
+		<% else %>
+			<p>
+			  <b>Payload weight:</b>
+			  <%= @vehicle.payload_weight %>
+			</p>
+		<% end %>
+
+		<p>
+		  <b>Vehicle identifier:</b>
+		  <%= @vehicle.v_identifier %>
+		</p>
+
+		<div style="margin-bottom:44px;">
+			
+			<%= link_to 'Vehicle Info 1', info_vehicle_path(@vehicle,:info => "first_url"),:class => "pull-left btn btn-success btn-lg active", :role =>"button" %>
+	   
+			<%= link_to 'Vehicle Info 2', info_vehicle_path(@vehicle,:info => "second_url"),:class => "pull-left btn btn-default btn-lg active", :role =>"button" %>
+			
+		</div>
+	</div>
+	<%= link_to 'Edit', edit_vehicle_path(@vehicle),:class => "pull-right btn btn-warning btn-lg active", :role =>"button" %>&nbsp;
+</div>

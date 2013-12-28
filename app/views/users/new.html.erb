@@ -1,0 +1,13 @@
+<div class="well well-lg">
+  <% if user_signed_in? %>
+  	<% if current_user.admin? %>
+			<%= link_to 'Back', users_path, :class=>"pull-right" %>
+		<% else %>
+		  <%= link_to 'Back', root_path, :class=>"pull-right"%>	
+    <% end %>
+  <% end %>		  
+	<div class="form-cover">
+		<h1>New user</h1>
+		<%= render 'form' %>
+	</div>
+<div><br/>

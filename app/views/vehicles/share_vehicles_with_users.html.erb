@@ -1,0 +1,32 @@
+<h2>Allocate vehicle to users</h2>
+
+<div class="well well-lg form-cover">
+  <table class="table">
+    <tr>
+      <th>User</th>
+      <th>Age</th>
+      <th>Sex</th>
+      <th></th>
+    </tr>
+
+    <% @users.each do |user| %>  
+      <tr>
+        <% if !user.admin? && user.id != current_user.id%>
+          <td><%= link_to user.user_detail.first_name}&nbsp;user.user_detail.last_name, user  %></td>
+          <td><%= user.user_detail.last_name %></td>
+          <td><%= user.user_detail.age %></td>
+          <td><%= user.user_detail.sex %></td>
+          <td><%= link_to 'Show', user %></td>
+          <% shared = UserAccess.where(:user_id => user.id, :vehicle_id => @vehicle.first.id ) %>
+          <% if shared.blank? %>
+            <td><%= link_to 'share', share_vehicle_path(user, :vehicle_id => @vehicle.first.id, :shared_by => current_user.id ), :remote => true, :class => 'share' %>
+            </td>
+          <% else %>
+            <td><%= link_to 'unshare', unshare_vehicle_path(user, :vehicle_id => @vehicle.first.id, :shared_by => current_user.id ), :remote => true, :class => 'unshare' %>
+            </td>
+          <% end %>   
+        <% end %>
+      </tr>
+    <% end %>
+  </table>
+</div><br/>
