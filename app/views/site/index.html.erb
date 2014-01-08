@@ -1,18 +1,11 @@
 <div class="container">	
 	<% if user_signed_in? %>
-		<div>
-	   	<% if !flash[:notice].blank? %>
-	    	<div class="alert alert-success" id="test">
-	      	Signed In Successfully
-	    	</div>
-    	<%end%>
-  	</div>
 	  <% unless current_user.admin? %>
 	    <h2>Welcome <%=current_user.user_detail.first_name.capitalize%></h2>
 	  <% else %>	
 	    <h2>Welcome Admin</h2>
 	  <% end%>
-    <div class="well well-lg">
+    <div class="well well-large">
       <ul class="nav nav-pills nav-stacked">
   			<li class="active">
     			<%= link_to 'Admin Options', root_path if current_user.admin? %>
@@ -20,42 +13,39 @@
   			</li>
   		</ul>
 	  	<%= render_breadcrumbs %>
-    	<div class="well well-sm"> 
+    	<div class="well well-large alert-info"> 
 				<% if current_user.try(:admin?) %>
       		<div class="admin-options">
 	  				<div class="block">
-	  				  <%= link_to (image_tag("users.png",:width=>"100px",:height=>"100px")), users_path,:title=>"Users",:id=>"users",:class=>"thumbnail" %>
+	  				  <%= link_to (image_tag("users.png",:width=>"100px",:height=>"100px")), users_path,:title=>"Users",:id=>"users",:class=>"thumbnail thumb-back" %>
+              <div class="menu-icons-text" >
+                <%= link_to 'Users', users_path, :title=>"Users" %></div>
+	  				  </div>
+	  				<div class="block">
+	  				  <%= link_to (image_tag("vehicles.png",:width=>"100px",:height=>"100px")), vehicles_path,:title=>"Vehicles",:id=>"vehicles",:class=>"thumbnail thumb-back" %>
+              <div class="menu-icons-text" >
+                <%= link_to 'Vehciles', vehicles_path, :title=>"Vehicles" %>
+              </div>
 	  				</div>
 	  				<div class="block">
-	  				  <%= link_to (image_tag("vehicles.png",:width=>"100px",:height=>"100px")), vehicles_path,:title=>"Vehicles",:id=>"vehicles",:class=>"thumbnail" %>
-	  				</div>
-	  				<div class="block">
-	  				  <%= link_to (image_tag("vehicle-types.png",:width=>"100px",:height=>"100px")), vehicle_types_path,:title=>"Vehicle types",:id=>"vehicle_types",:class=>"thumbnail" %>
+	  				  <%= link_to (image_tag("vehicle-types.png",:width=>"100px",:height=>"100px")), vehicle_types_path,:title=>"Vehicle types",:id=>"vehicle_types",:class=>"thumbnail thumb-back" %>
+              <div class="menu-icons-text" >
+                <%= link_to 'Vehcile types', vehicle_types_path, :title=>"Vehicle types" %>
+              </div>
 	  				</div>
   					<div class="block">
-  				   	<%= link_to (image_tag("engines.png",:width=>"100px",:height=>"100px")), engines_path,:title=>"Engines",:id=>"engines",:class=>"thumbnail" %>
+  				   	<%= link_to (image_tag("engines.png",:width=>"100px",:height=>"100px")), engines_path,:title=>"Engines",:id=>"engines",:class=>"thumbnail thumb-back" %>
+              <div class="menu-icons-text" >
+                <%= link_to 'Engines', engines_path, :title=>"Engines" %>
+              </div>
   					</div>
   					<div class="block">
-  				   	<%= link_to (image_tag("fuels.png",:width=>"100px",:height=>"100px")), fuels_path,:title=>"Fuels",:id=>"fuels",:class=>"thumbnail" %>
+  				   	<%= link_to (image_tag("fuels.png",:width=>"100px",:height=>"100px")), fuels_path,:title=>"Fuels",:id=>"fuels",:class=>"thumbnail thumb-back" %>
+              <div class="menu-icons-text" >
+                <%= link_to 'Fuels', fuels_path, :title=>"Fuels" %>
+              </div>
   					</div>
-	  				<div class="block">
-	  				  <%= link_to (image_tag("constructions.png",:width=>"100px",:height=>"100px")), constructions_path,:title=>"Vehicle construction",:id=>"constructions",:class=>"thumbnail" %>
-	  				</div>
-	  				<div class="block">
-	  				  <%= link_to (image_tag("settings.png",:width=>"100px",:height=>"100px")), admin_settings_users_path,:title=>"Admin settings",:id=>"settings",:class=>"thumbnail" %>
-	  				</div>
 	        </div>
-				<% elsif current_user %>
-					<div class="user-options">
-					  <div class="block">
-					   	<%= link_to (image_tag("vehicles.png",:width=>"100px",:height=>"100px")),vehicles_path,:title=>"Vehicles",:id=>"user_vehicles",:class=>"thumbnail" %>
-					   	<%= link_to 'Vehciles', vehicles_path %>
-						</div>
-						<div class="block">
-						  <%= link_to (image_tag("profile.png",:width=>"100px",:height=>"100px")), current_user,:title=>"My profile",:id=>"my_profile",:class=>"thumbnail" %>
-						  <%= link_to 'My profile', vehicles_path %>
-						</div>
-					</div>		
 				<% end %>
 			</div>	
 		</div>

@@ -1,10 +1,11 @@
-<div class="well well-lg">
-	<%= link_to 'Back', vehicles_path, :class=>"pull-right" %>
-	<div class="form-cover">
-	  <h1>New vehicle</h1>
+<h2>New vehicle</h2>
+<%= link_to 'Back', vehicles_path, :class => "pull-right btn btn-primary btn-lg", :role =>"button" %><br/><br/>
+
+	<div class="well well-lg">
+    <%= render_breadcrumbs%>
 	  <%= render 'form' %>
 	</div>
-</div>	
+
 
 
 

@@ -12,6 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jquery.ui.all
 //= require twitter/bootstrap
 //= require jquery.validate
 //= require jquery.validate.additional-methods
@@ -23,18 +24,10 @@ $(document).ready(function() {
 	    $('#test').fadeOut('slow');
 	}, 3000);
 
+    $('.delete_post').bind('ajax:success', function() {  
+        $(this).closest('tr').fadeOut();  
+    }); 
 
-    $('.delete_vehicle').live('ajax:success', 
-   function(data, textStatus, jqXHR){ 
-     alert(data.vehicle + ' has been deleted'); 
-   }); 
-});	
-
-
-
-
-
- $(document).ready(function() {
     $("#new_user").validate({
     	  onsubmit: true,
     	  errorClass: 'got_error',
@@ -48,8 +41,6 @@ $(document).ready(function() {
                 minlength: 7
             },
             "user[password_confirmation]":{
-                required: true,
-                minlength: 7,
                 equalTo: "#user_password"
             },
             "user[user_detail_attributes][first_name]":{
@@ -80,8 +71,6 @@ $(document).ready(function() {
                 minlength: "Min Length is 8 characters"
             },
             "user[password_confirmation]":{
-                required: "Required",
-                minlength: "Min Length is 8 characters",
                 equalTo: "New Password Doesn't Match"
             },
             "user[user_detail_attributes][first_name]":{
@@ -95,5 +84,17 @@ $(document).ready(function() {
             }
         }
     });
+
+    $(".down").hide();
+    $(".up").click(function(){
+    $("#user_vehicles").slideUp();
+    $(".up").hide();
+    $(".down").show();
+  });
+  $(".down").click(function(){
+    $("#user_vehicles").slideDown();
+    $(".down").hide();
+    $(".up").show();
+  });
 });
 

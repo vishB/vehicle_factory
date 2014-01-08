@@ -1,47 +1,60 @@
 <h2>Add more vehicles</h2>
-<%= link_to "Back", vehicles_path, :class=>"pull-right btn btn-primary btn-lg active", :role => "button"%><br/><br/>
-<%= form_tag more_vehicles_path do %>
-  <div class="well well-sm">
-    <!-- Table -->
-    <table class="table">
-      <tr>
-        <th>Select</th>
-        <th>Vehicle</th>
-        <th>Occupants</th>
-        <th>Payload weight</th>
-        <th>Construction Start date</th>
-        <th>Construction Delivery date</th>
-        <th></th>
-        <th></th>
-      </tr>
-
-      <% @vehicles.each do |vehicle| %>  
-        <tr>
-          <% unless current_user.admin?%>
-
-            <td><%= check_box_tag("check#{vehicle.id}", value = "#{vehicle.id}", 
-            checked = false )%></td>
-            <td><%= link_to "#{vehicle.vehicle_type}-#{vehicle.v_identifier}", vehicle %></td>
-            <% if vehicle.vehicle_type == "Shuttle"%>
-              <td><%= vehicle.occupants %></td>
-            <% else%>
-              <td>NA</td>
-            <% end %>
-            <% if vehicle.vehicle_type == "Satellite"%>
-              <td><%= vehicle.payload_weight %></td>
-            <% else%>
-              <td>NA</td>
-            <% end %>
-            <td><%= vehicle.construction.start_date.to_date %></td>
-            <td><%= vehicle.construction.delivery_date.to_date %></td>   
-            <td><%#= link_to 'Show', vehicle %></td>
-            <td><%= hidden_field_tag 'user_id', current_user.id %></td><br/> 
+<%= link_to "Back", vehicles_path, :class=>"pull-right btn btn-primary", :role => "button"%><br/><br/>
+<div class="well well-large">
+  <%= render_breadcrumbs%>
+  <div class="tabbable"> <!-- Only required for left/right tabs -->
+    <ul class="nav nav-tabs">
+      <li class="active"><a href="#tab1" data-toggle="tab">Add more vehicles</a></li>
+      <li><a href="#tab2" data-toggle="tab">Deallocate vehicles</a></li>
+    </ul>
+    <div class="tab-content">
+      <div class="tab-pane active" id="tab1">
+        <h3>Available vehicles :</h3>
+          <%= form_tag more_vehicles_path do %>
+            <table class="table table-bordered table-condensed">
+              <tr>
+              <%= render :partial => "vehicle_headers"%>
+              </tr>
+              <% @vehicles.each do |vehicle| %>  
+                <tr>
+                  <% unless current_user.admin?%>
+                    <% unless @user_vehicles.include?vehicle.id %>
+                      <td style="text-align:center;"><%= check_box_tag("check#{vehicle.id}", value = "#{vehicle.id}", checked = false )%></td>  
+                      <%= render :partial => "vehicle_details", :locals => {vehicle:vehicle}%>
+                    <% end %>
+                  <% end %>
+                </tr>
+              <% end %>
+            </table>
+            <%= submit_tag "Add",:class=>"btn btn-warning pull-right"%>
           <% end %>
-        </tr>
-      <% end %>
-    </table><br/>
-    <div class="pull-right">
-    <%= submit_tag "Add",:class=>"btn btn-warning btn-lg"%>
-  </div><br/><br/>
+      </div>
+      <div class="tab-pane" id="tab2">
+        <div id="user_vehicles">
+          <h3>Added vehicles :</h3>
+          <%= form_tag remove_vehicles_path do %>
+            <table class="table table-bordered table-condensed">
+              <tr>
+                <%= render :partial => "vehicle_headers"%>
+              </tr>
+              <% @vehicles.each do |vehicle| %>  
+                <tr>
+                  <% unless current_user.admin?%>
+                    <% if @user_vehicles.include?vehicle.id %>
+                      <td style="text-align:center;"><%= check_box_tag("check#{vehicle.id}", value = "#{vehicle.id}", checked = false )%></td>  
+                      <%= render :partial => "vehicle_details", :locals => {vehicle:vehicle}%>
+                    <% end %>
+                  <% end %>
+                </tr>
+              <% end %>
+            </table>
+            <%= submit_tag "Deallocate",:class=>"btn btn-warning pull-right"%>
+          <% end %>
+        </div>
+      </div>
+    </div>
   </div>
-<% end %>
+</div>
+
+
+

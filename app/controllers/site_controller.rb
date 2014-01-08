@@ -3,6 +3,10 @@ class SiteController < ApplicationController
   	User.one_admin # First registered user should be admin
 
   	# Check if user has logged in.
-  	redirect_to new_user_session_path unless user_signed_in?
+    if user_signed_in?
+      redirect_to vehicles_path unless current_user.admin?
+    else
+      redirect_to new_user_session_path
+    end  
   end
 end

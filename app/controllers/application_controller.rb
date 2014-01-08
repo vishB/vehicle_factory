@@ -3,6 +3,11 @@ class ApplicationController < ActionController::Base
   
   add_breadcrumb "Home", :root_path
 
+  def back
+    session[:url] = request.original_url
+    session[:last_url] = request.referrer
+  end
+
   def get_list
     # Collecting Vehicle types
     vehicle_types = VehicleType.all                            
@@ -15,5 +20,17 @@ class ApplicationController < ActionController::Base
     # Collecting Vehicle Information
     vehicles = Vehicle.all
     @vehicles = vehicles.collect { |x| x.v_identifier}
-  end  
+  end
+
+  # find available vehicles for selected vehicle
+  def get_available_users(vehicle)
+    vehicle_users = vehicle.first.users
+    all_users = User.all
+    @available_users = all_users - vehicle_users
+  end
+
+  #find users working on selected vehicle  
+  def get_allocated_users(vehicle)
+
+  end
 end

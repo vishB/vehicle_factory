@@ -4,6 +4,7 @@ class VehicleTypesController < ApplicationController
   # GET /vehicle_types.json
   def index
     @vehicle_types = VehicleType.all
+    add_breadcrumb "Vehicle types", :vehicle_types_path
 
     respond_to do |format|
       format.html # index.html.erb
@@ -15,6 +16,7 @@ class VehicleTypesController < ApplicationController
   # GET /vehicle_types/1.json
   def show
     @vehicle_type = VehicleType.find(params[:id])
+    add_breadcrumb "Vehicle types", :vehicle_types_path
 
     respond_to do |format|
       format.html # show.html.erb
@@ -26,7 +28,7 @@ class VehicleTypesController < ApplicationController
   # GET /vehicle_types/new.json
   def new
     @vehicle_type = VehicleType.new
-
+    add_breadcrumb "Vehicle types", :vehicle_types_path
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @vehicle_type }
@@ -36,6 +38,7 @@ class VehicleTypesController < ApplicationController
   # GET /vehicle_types/1/edit
   def edit
     @vehicle_type = VehicleType.find(params[:id])
+    add_breadcrumb "Vehicle types", :vehicle_types_path
   end
 
   # POST /vehicle_types

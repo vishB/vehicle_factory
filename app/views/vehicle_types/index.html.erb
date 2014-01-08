@@ -1,24 +1,41 @@
-<h2>Listing Vehicle Types</h2>
-<%= link_to 'New Vehicle type', new_vehicle_type_path %>  <%= link_to 'Back', root_path, :class => "pull-right" %><br/><br/>
-<div class="well well-sm">
-  <!-- Table -->
-  <table class="table">
-    <tr>
-      <th>Vehicle Type</th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-
-    <% @vehicle_types.each do |vehicle_type| %>
-      <tr>
-        <td><%= vehicle_type.kind %></td>
-        <td><%= link_to 'Show', vehicle_type %></td>
-        <td><%= link_to 'Edit', edit_vehicle_type_path(vehicle_type) %></td>
-        <td><%= link_to 'Destroy', vehicle_type, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+<div class="container">
+  <% if user_signed_in? %>
+    <!-- Notifications  -->
+    <% if flash[:error] %>
+      <div class="alert alert-success" id="test">
+        <%=flash[:notice]%>
+      </div>
+    <% elsif notice %> 
+       <div class="alert alert-success" id="test">
+        <%= notice%>
+      </div>
     <% end %>
-  </table>
+    <h2>Listing Vehicle Types</h2>
+
+    <%= link_to 'New Vehicle type', new_vehicle_type_path, :class=>"pull-left btn btn-success btn-lg", :role => "button" %>  <%= link_to 'Back', root_path,:class=>"pull-right btn btn-primary btn-lg", :role => "button" %><br/><br/>
+    <div class="well well-large">
+      <%= render_breadcrumbs %>
+      <div class="well well-large alert alert-info">
+      <!-- Table -->
+      <table class="table table-bordered table-condensed table-striped">
+        <tr>
+          <th>Vehicle Type</th>
+          <th></th>
+          <th></th>
+        </tr>
+
+        <% @vehicle_types.each do |vehicle_type| %>
+          <tr>
+            <td><%= link_to "#{vehicle_type.kind}", vehicle_type %></td>
+            <td><%= link_to (image_tag("edit.ico",:width=>"14px",:height=>"14px")), edit_vehicle_type_path(vehicle_type) %></td>
+            <td><%= link_to (image_tag("destroy.ico",:width=>"14px",:height=>"14px")), vehicle_type, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          </tr>
+        <% end %>
+      </table>
+      </div>
+    </div>
+    <br />
+  <% end %>
 </div>
-<br />
+
 

@@ -20,7 +20,9 @@ class VehiclesController < ApplicationController
   # GET /vehicles/1.json
   def show
     @vehicle = Vehicle.find(params[:id])
+    add_breadcrumb "Vehicles", :vehicles_path
     add_breadcrumb "#{@vehicle.vehicle_type}-#{@vehicle.v_identifier}", :vehicles_path
+    back
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @vehicle }
@@ -30,7 +32,7 @@ class VehiclesController < ApplicationController
   # GET /vehicles/new
   # GET /vehicles/new.json
   def new
-    add_breadcrumb "Vehicles", :new_vehicle_path
+    add_breadcrumb "Vehicles", :vehicles_path
     @vehicle = Vehicle.new
     @vehicle.build_construction
     get_list
@@ -43,8 +45,9 @@ class VehiclesController < ApplicationController
 
   # GET /vehicles/1/edit
   def edit
-    add_breadcrumb "Vehicles", :edit_vehicle_path
     @vehicle = Vehicle.find(params[:id])
+    add_breadcrumb "Vehicles", :edit_vehicle_path
+    add_breadcrumb "#{@vehicle.vehicle_type}-#{@vehicle.v_identifier}", :edit_vehicle_path
     get_list
   end
 
@@ -94,12 +97,9 @@ class VehiclesController < ApplicationController
           flash[:notice] = " Vehicle deleted successfully."
           format.html { redirect_to vehicles_url }
           format.js { render :json => {:vehicle => "#{vehicle}"}}
-          #format.json { head :no_content }
-          #format.js   { render :layout => false }
         else
           flash[:error] = "Sorry! Vehicle delivery date has not passed yet."
           format.html { render action: "index" }
-          #format.js   { render :layout => false }
         end
       end 
     end
@@ -113,12 +113,13 @@ class VehiclesController < ApplicationController
       @identifier = @vehicle.v_identifier
       @engine = @vehicle.engine
       @users = @vehicle.users
-        render :json => {
-          :identifier => @identifier,
-          :engine => @engine,
-          :users => @users
-        }
-    # Second information url shows identifier,engine information and vehicle delivery date
+      render :json => {
+        :identifier => @identifier,
+        :engine => @engine,
+        :users => @users
+      }
+      
+    #Second information url shows identifier,engine information and vehicle delivery date
     elsif params[:info] == "second_url"
       @vehicle = Vehicle.find(params[:id])
       @identifier = @vehicle.v_identifier
@@ -136,7 +137,6 @@ class VehiclesController < ApplicationController
     if params[:engine_model]
       @power = Engine.where(:model => params[:engine_model]).first.power_rating
       respond_to do |format|
-        #format.json { render :json => @power.to_json}
         format.js { render :layout => false, :locals => {:power => @power} } 
       end
     end

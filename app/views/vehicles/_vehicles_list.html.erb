@@ -1,12 +1,9 @@
-<%= render_breadcrumbs %>
 <!-- Vehicles Listing -->
-<div class="well well-sm">
   <% unless @vehicles.blank?%>
-    <table class="table">
+    <table class="table table-bordered table-condensed table-striped">
       <tr>
-        <!-- <th>Type</th> -->
-        <!-- <th>Vehicle identifier</th> -->
         <th>Vehicle</th>
+        <th>Engine model</th>
         <th>Occupants</th>
         <th>Payload weight</th>
         <th>Construction Start date</th>
@@ -19,7 +16,7 @@
       <% @vehicles.each do |vehicle| %>
         <tr>
           <td><%= link_to "#{vehicle.vehicle_type}-#{vehicle.v_identifier}", vehicle %></td>
-          <!-- <td><%= vehicle.v_identifier %></td> -->
+          <td><%= link_to "#{vehicle.engine.model}", vehicle.engine%></td>
           <% if vehicle.vehicle_type == "Shuttle"%>
             <td><%= vehicle.occupants %></td>
           <% else%>
@@ -32,19 +29,18 @@
           <% end %>  
           <td><%= vehicle.construction.start_date.to_date %></td>
           <td><%= vehicle.construction.delivery_date.to_date %></td>
-          <td><%= link_to (image_tag("edit.ico")), edit_vehicle_path(vehicle) %></td>
-          <% if current_user.admin?%>
-            <td><%= link_to (image_tag("destroy.ico")), vehicle, method: :delete, data: 
-            { confirm: 'Are you sure?' }, :remote => true, :class => 'delete_vehicle' %>
-            </td>
+          <td><%= link_to (image_tag("edit.ico",:width=>"14px",:height=>"14px",:title => "Edit Vehicle Details")), edit_vehicle_path(vehicle) %></td>
+          <% if vehicle.construction.delivery_date.to_date > Time.now.to_date %>
+            <td><%= image_tag("stop.ico", :width=>"16px",:height=>"16px",:id => "stop", :title => "Vehicle still under construction")
+            %></td>
           <% else %>  
-            <td><%= link_to (image_tag("destroy.ico")), vehicle, method: :delete, data: 
-            { confirm: "Are you sure you want remove #{vehicle.vehicle_type}-#{vehicle.v_identifier} from you vehicles list ?" }, :remote => true, :class => 'delete_vehicle','data-type' => 'json' %></td>
-          <% end %>
+            <td><%= link_to (image_tag("destroy.ico",:width=>"14px",:height=>"14px",:title => "Delete Vehicle")), vehicle, method: :delete, data: 
+              { confirm: "Are you sure you want to remove #{vehicle.vehicle_type}-#{vehicle.v_identifier} from you vehicles list ?" }, :remote => true, :class => 'delete_vehicle','data-type' => 'json' %></td>
+           <% end %>   
           <% if current_user.admin? %>
-            <td><%= link_to 'Allocate users', allocate_users_path(vehicle) %></td>
+            <td><%= link_to 'Share/Unshare', share_vehicles_with_users_path(vehicle),:title => "Allocate vehicles to users" %></td>
           <% else %>      
-            <td><%= link_to (image_tag("share.ico",:width=>"24px",:height=>"24px")), share_vehicles_with_users_path(vehicle) %>
+            <td><%= link_to (image_tag("share.png",:width=>"16px",:height=>"16px", :title => "Share vehicle with other users")), share_vehicles_with_users_path(vehicle) %>
             </td>
           <%end%>      
         </tr>
@@ -53,10 +49,8 @@
   <% else %>
     <div class="panel-body panel-warning">
       <center>
-        <strong> No vehicles assigned yet, please add vehicle. </strong>
+        <strong> No vehicles assigned/created yet, please add vehicle. </strong>
       </center>
     </div>
-  <% end %>
-</div>
+  <% end %> 
 <!-- Vehicles Listing -->
-

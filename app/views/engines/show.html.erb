@@ -1,21 +1,28 @@
-<div class="alert alert-success" id="test">
-  <p id="notice"><%= notice %></p>
+<h2><%= "#{@engine.model}"%></h2>
+
+<% if current_user.admin? && session[:last_url]!=session[:url] %>
+    <%= link_to 'Back', session[:last_url], :class => "pull-right btn btn-primary btn-lg", :role =>"button" %>
+<% elsif !current_user.admin? && session[:last_url]!=session[:url]  %>
+  <%= link_to 'Back', root_path, :class => "pull-right btn btn-primary btn-lg", :role =>"button"%>
+<% end %><br/><br/>
+
+<div class="well well-large">
+  <%= render_breadcrumbs %>
+  <div class="well well-large alert alert-info"> 
+    <p>
+      <b>Power rating:</b>
+      <%= @engine.power_rating %>
+    </p>
+
+    <p>
+      <b>Fuel Type:</b>
+      <%= @engine.fuel.fuel_type %>
+    </p>
+
+    <p>
+      <b>Model Number:</b>
+      <%= @engine.model %>
+    </p>
+  </div>
+    <%= link_to 'Edit', edit_engine_path(@engine),:class=>"pull-right btn btn-warning btn-lg", :role => "button" %><br/>
 </div>
-<p>
-  <b>Power rating:</b>
-  <%= @engine.power_rating %>
-</p>
-
-<p>
-  <b>Fuel Type:</b>
-  <%= @engine.fuel.fuel_type %>
-</p>
-
-<p>
-  <b>Model Number:</b>
-  <%= @engine.model %>
-</p>
-
-
-<%= link_to 'Edit', edit_engine_path(@engine) %> |
-<%= link_to 'Back', engines_path %>

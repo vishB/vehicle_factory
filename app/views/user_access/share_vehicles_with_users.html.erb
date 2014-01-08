@@ -1,43 +1,89 @@
-<% if flash[:error] %>
-  <div class="alert alert-success" id="test">
-    <%=flash[:notice]%><% flash[:notice] = nil %>
-  </div>
-<% elsif notice %> 
-   <div class="alert alert-success" id="test">
-    <%= notice%><% flash[:notice] = nil %>
-  </div>
-<% end %>
-
-<%= form_tag share_vehicles_with_users_path(:class => "form-cover") do %>
-<%=hidden_field_tag 'vehicle_id', @vehicle.first.id %>
-<%=hidden_field_tag 'shared_by', current_user.id%>
 <h2>Share <%="#{@vehicle.first.vehicle_type}-#{@vehicle.first.v_identifier}"%> with users</h2>
-<%=link_to 'Back',vehicles_path%>
-<div class="well well-sm">
-  <div class="well well-sm">
-    <table class="table">
-      <tr>
-        <th>User</th>
-        <th>Age</th>
-        <th>Sex</th>
-        <th>Select</th>
-      </tr>
+<%=link_to 'Back',vehicles_path,:class=>"pull-right btn btn-primary", :role => "button"%><br><br>
+    <div class="tabbable well well-large"> <!-- Only required for left/right tabs -->
+      <%= render_breadcrumbs%>
+      <ul class="nav nav-tabs">
+        <li class="active"><a href="#tab1" data-toggle="tab">Share with users</a></li>
+        <li><a href="#tab2" data-toggle="tab">Unshare with users</a></li>
+      </ul>
+      <div class="tab-content">
+        <div class="tab-pane active" id="tab1">
+          <!-- First tab section -->
+          <%= form_tag share_vehicles_with_users_path do %>
+            <%=hidden_field_tag 'vehicle_id', @vehicle.first.id %>
+            <%=hidden_field_tag 'shared_by', current_user.id%>
 
-      <% @users.each do |user| %>  
-        <tr>
-          <% if !user.admin? && user.id != current_user.id%>
-            <td><%= link_to "#{user.user_detail.first_name } #{user.user_detail.last_name}", user%></td>
-            <td><%= user.user_detail.age %></td>
-            <td><%= user.user_detail.sex %></td>
-            <td><%=check_box_tag("check#{user.id}", value = "#{user.id}", checked = false, 
-            options = {})%>
-            </td><br/> 
-          <% end %>
-        </tr>
-      <% end %>
-    </table>
+              <div class="well well-large alert alert-info">
+                <table class="table table-condensed table-bordered table-striped">
+                  <tr>
+                    <th>User</th>
+                    <th>Email</th>
+                    <th>Age</th>
+                    <th>Gender</th>
+                    <th>Select</th>
+                  </tr>
+
+                  <% @users.each do |user| %>  
+                    <tr>
+                      <% if !user.admin? && user.id != current_user.id%>
+                        <% unless @vehicle_users.include?user%>
+                          <td><%= "#{user.user_detail.first_name } #{user.user_detail.last_name}"%>
+                          </td>
+                          <td><%= user.email%></td>
+                          <td><%= user.user_detail.age %></td>
+                          <td><%= user.user_detail.sex %></td>
+                          <td><%=check_box_tag("check#{user.id}", value = "#{user.id}", 
+                            checked = false,options = {})%>
+                          </td><br/> 
+                        <% end %>  
+                      <% end %>
+                    </tr>
+                  <% end %>
+                </table>
+                </div>
+              <%= submit_tag "Share",:class => "pull-right btn btn-warning", 
+              :role =>"button"%><br />      
+            <% end %>
+        </div>
+
+        <div class="tab-pane" id="tab2">
+          <%= form_tag unshare_vehicles_path do %>
+            <%=hidden_field_tag 'vehicle_id', @vehicle.first.id %>
+            <%=hidden_field_tag 'shared_by', current_user.id%>
+
+              <div class="well well-large alert alert-info">
+                <table class="table table-condensed table-bordered table-striped">
+                  <tr>
+                    <th>User</th>
+                    <th>Email</th>
+                    <th>Age</th>
+                    <th>Gender</th>
+                    <th>Select</th>
+                  </tr>
+
+                  <% @users.each do |user| %>  
+                    <tr>
+                      <% if !user.admin? && user.id != current_user.id%>
+                        <% if @vehicle_users.include?user%>
+                          <td><%= "#{user.user_detail.first_name } #{user.user_detail.last_name}"%>
+                          </td>
+                          <td><%= user.email%></td>
+                          <td><%= user.user_detail.age %></td>
+                          <td><%= user.user_detail.sex %></td>
+                          <td><%=check_box_tag("check#{user.id}", value = "#{user.id}", 
+                            checked = false,options = {})%>
+                          </td><br/> 
+                        <% end %>  
+                      <% end %>
+                    </tr>
+                  <% end %>
+                </table>
+                </div>
+              <%= submit_tag "Unshare",:class => "pull-right btn btn-warning", 
+              :role =>"button"%><br />      
+            <% end %>
+        </div>
+      </div>
     </div>
-  <%= submit_tag "Share",:class => "pull-right btn btn-warning btn-lg active", 
-  :role =>"button"%><br />    
-</div>    
-<% end %>
+
+

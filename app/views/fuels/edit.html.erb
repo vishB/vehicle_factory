@@ -1,6 +1,9 @@
-<h1>Editing fuel</h1>
-
-<%= render 'form' %>
-
-<%= link_to 'Show', @fuel %> |
-<%= link_to 'Back', fuels_path %>
+<h2>Editing fuel</h2>
+  <%= link_to 'Back', fuels_path, :class => "pull-right btn btn-primary btn-lg", :role =>"button" %><br/><br/>
+    
+  <div class="well well-lg">
+    <%= render_breadcrumbs %>
+    <div class="well well-lg">  
+     <%= render 'form' %>
+    </div>
+  </div>

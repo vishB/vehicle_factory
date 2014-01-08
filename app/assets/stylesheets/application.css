@@ -9,7 +9,9 @@
  * compiled file, but it's generally better to create a new file per style scope.
  *
  *= require_self
+ *= require jquery.ui.all
  *= require_validation
+ *= 
  *= require_tree .
  */
 
@@ -17,8 +19,12 @@
 .login-cover{
   margin-left: auto;
   margin-right: auto;
-  max-width: 225px;
-  border: 20px solid rgba(0, 0, 0, 0.3);
+  margin-top: 60px;
+  width: 30%;
+}
+.container-spacing{
+	margin-bottom: 20px;
+    margin-top: 34px;
 }
 
 body {
@@ -26,6 +32,10 @@ body {
 	background-image:url('/assets/space-shuttle.jpg');
 	background-repeat:no-repeat;
 	background-size: 100%;
+}
+
+.master-color{
+	background-color: #000000;
 }
 
 .container h2 {color:#ffffff;}
@@ -41,23 +51,11 @@ label.required:after{content:"*"}
 
 .form-cover h2 { color:black;}
 
-.footer-center{
-	margin-left:auto;
-	margin-right:auto;
-	width:260px;
-}
-
 .block{
 	width:100px;
 	height:100px;
 	float:left;
 	padding:20px;
-}
-
-.admin-options{
-	height: 400px;
-    padding: 20px;
-    width: 96%;
 }
 
 .user-options{
@@ -67,10 +65,51 @@ label.required:after{content:"*"}
 }
 
 .footer{
-	color: #FFFFFF;
-    margin-left: auto;
-    margin-right: auto;
-    width: 310px;
+    width:100%;
+	height:80px;
+	position:relative;
+	bottom:0;
+	left:0;
+	text-align: center;
+	color:#ffffff;
+}
+.nav-top{
+	margin-top:9px;
 }
 
+.center-text{
+	text-align: center;
+}
 
+.correct-image img{
+	width:14px;
+	height:14px;
+}
+
+.thumbnail {
+    margin-bottom: 6px;
+}
+
+.well {
+    overflow: auto;
+}
+
+.remember{
+	margin-left: 10px;
+    margin-top: 4px;
+}
+
+.wrapper{
+	margin-bottom: 20px;
+	min-height: 20px;
+	padding: 19px;
+	background-color: #F5F5F5;
+	border-radius: 29px 29px 29px 29px;
+	border-style: solid;
+	border-width: 1.3px;
+	box-shadow: 10px 10px 5px #413F24;
+}
+
+.thumb-back{
+	background-color: #FFFFFF;
+}

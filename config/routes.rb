@@ -14,7 +14,6 @@ Factory::Application.routes.draw do
   resources :users, :controller => "users" do
     collection do
       get 'change_password'
-      get 'admin_settings'
       get 'change_admin'
       post 'change_admin'
     end
@@ -46,14 +45,19 @@ Factory::Application.routes.draw do
   # Allow users to add more vehicles
   match 'user_accesses/:id/add_more_vehicles' => 'user_access#add_more_vehicles', :as => :more_vehicles
 
+  match 'user_accesses/:id/remove_vehicles' => 'user_access#remove_vehicles', :as => :remove_vehicles
+
   # Allow users to share vehicles to users
   match 'user_accesses/:id/share_vehicles_with_users' => 'user_access#share_vehicles_with_users', :as => :share_vehicles_with_users
-  
+
   # Allow users to share vehicles to users
-  match 'user_accesses/:id/unshare_vehicle' => 'user_access#unshare_vehicle', :as => :unshare_vehicle
+  match 'user_accesses/:id/unshare_vehicles' => 'user_access#unshare_vehicles', :as => :unshare_vehicles
   
-  # Allow users to share vehicles to users
-  match 'user_accesses/:id/share_vehicle' => 'user_access#share_vehicle', :as => :share_vehicle
+  # # Allow users to share vehicles to users
+  # match 'user_accesses/:id/unshare_vehicle' => 'user_access#unshare_vehicle', :as => :unshare_vehicle
+  
+  # # Allow users to share vehicles to users
+  # match 'user_accesses/:id/share_vehicle' => 'user_access#share_vehicle', :as => :share_vehicle
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

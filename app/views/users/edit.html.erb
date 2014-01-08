@@ -1,14 +1,12 @@
-<div class="well well-lg">
-  <% if user_signed_in? %>
-  	<% if current_user.admin? %>
-			<%= link_to 'Back', users_path, :class=>"pull-right btn btn-primary btn-lg active", :role => "button" %>
-		<% else %>
-		  <%= link_to 'Back', root_path, :class=>"pull-right btn btn-primary btn-lg active", :role => "button"%>	
+<h2>Edit User Information</h2>
+<% if user_signed_in? %>
+    <% if current_user.admin? %>
+      <%= link_to 'Back', users_path, :class=>"pull-right btn btn-primary btn-lg", :role => "button" %><br/><br/>
+    <% else %>
+      <%= link_to 'Back', root_path, :class=>"pull-right btn btn-primary btn-lg", :role => "button"%><br/><br/>  
     <% end %>
-  <% end %>		  
-	<div class="form-cover well well-lg ">
-		<h2>Edit User Information</h2>
-		<%= render 'form' %>
-	</div>
+  
+<div class="well well-lg">
+	<%= render 'form' %>
 <div><br/>
-
+<% end %>     

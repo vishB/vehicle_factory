@@ -5,7 +5,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :remember_me, :admin, :user_detail_attributes
+  attr_accessible :email, :password, :password_confirmation, :remember_me, :admin, :created_by, :user_detail_attributes
   attr_accessible :status
   has_one :user_detail, dependent: :destroy
   accepts_nested_attributes_for :user_detail
@@ -21,5 +21,16 @@ class User < ActiveRecord::Base
       user = User.first
       user.update_attributes(:admin => true)
     end
+  end
+
+  #find the user creator
+  def self.creator(user)
+    unless user.created_by.blank? || user.created_by == 0.to_i
+      f_name = User.find(user.created_by).user_detail.first_name 
+      l_name = User.find(user.created_by).user_detail.last_name 
+      name = f_name + ' ' + l_name
+    else
+      name = "Annonymous user"
+    end  
   end
 end

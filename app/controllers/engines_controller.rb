@@ -4,6 +4,7 @@ class EnginesController < ApplicationController
   # GET /engines.json
   def index
     @engines = Engine.all
+    add_breadcrumb "Engines", :engines_path
 
     respond_to do |format|
       format.html # index.html.erb
@@ -14,8 +15,17 @@ class EnginesController < ApplicationController
   # GET /engines/1
   # GET /engines/1.json
   def show
+    back
     @engine = Engine.find(params[:id])
-
+    unless current_user.admin?
+      add_breadcrumb "Vehicle", :vehicles_path 
+      add_breadcrumb "Engine - #{@engine.model}", :vehicles_path
+    end
+    
+    if current_user.admin?   
+      add_breadcrumb "Engines", :engines_path
+      add_breadcrumb "#{@engine.model}", :vehicles_path
+    end
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @engine }
@@ -25,6 +35,7 @@ class EnginesController < ApplicationController
   # GET /engines/new
   # GET /engines/new.json
   def new
+    add_breadcrumb "Engines", :engines_path
     @engine = Engine.new
     fuel = Fuel.all
     @fuel_type = fuel.collect { |x| x.fuel_type }    
@@ -38,6 +49,8 @@ class EnginesController < ApplicationController
   # GET /engines/1/edit
   def edit
     @engine = Engine.find(params[:id])
+    add_breadcrumb "Engines", :engines_path
+    add_breadcrumb "#{@engine.model}", :engines_path
     fuel = Fuel.all
     @fuel_type = fuel.collect { |x| x.fuel_type } 
   end

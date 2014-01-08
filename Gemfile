@@ -23,14 +23,16 @@ gem 'jquery-rails'
 gem 'devise'
 gem "twitter-bootstrap-rails"
 gem 'jquery-validation-rails'
+gem "jquery-ui-rails", "~> 4.1.1"
 gem "breadcrumbs_on_rails"
+
 
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
 # To use Jbuilder templates for JSON
-# gem 'jbuilder'
+gem 'jbuilder'
 
 # Use unicorn as the app server
 # gem 'unicorn'

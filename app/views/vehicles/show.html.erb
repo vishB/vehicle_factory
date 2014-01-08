@@ -1,11 +1,12 @@
-<% unless notice.blank?%>
-	<div class="alert alert-success" id="test">
-		<p id="notice"><%= notice %></p>
-	</div>
-<% end %>
+
 <h2><%= @vehicle.vehicle_type %>-<%= @vehicle.v_identifier %></h2>
-<%= link_to 'Back', vehicles_path, :class => "pull-right btn btn-primary btn-lg active", :role =>"button" %><br/><br/>
+<% if current_user.admin? && session[:last_url]!=session[:url] %>
+    <%= link_to 'Back', session[:last_url], :class => "pull-right btn btn-primary btn-lg", :role =>"button" %>
+<% elsif current_user.admin? && session[:last_url]==session[:url]  %>
+  <%= link_to 'Back', root_path, :class => "pull-right btn btn-primary btn-lg", :role =>"button"%>
+<% end %><br/><br/>
 <div class="well well-sm">
+  <%= render_breadcrumbs %>
 	<div class="well well-sm">	
 		<p>
 		  <b>Vehicle Type:</b>
@@ -31,11 +32,12 @@
 
 		<div style="margin-bottom:44px;">
 			
-			<%= link_to 'Vehicle Info 1', info_vehicle_path(@vehicle,:info => "first_url"),:class => "pull-left btn btn-success btn-lg active", :role =>"button" %>
+			<%= link_to 'Vehicle Users', info_vehicle_path(@vehicle,:info => "first_url"),:class => "pull-left btn btn-default btn-lg", :role =>"button" %>
 	   
-			<%= link_to 'Vehicle Info 2', info_vehicle_path(@vehicle,:info => "second_url"),:class => "pull-left btn btn-default btn-lg active", :role =>"button" %>
-			
+			<%= link_to 'Vehicle Engine', info_vehicle_path(@vehicle,:info => "second_url"),:class => "pull-left btn btn-default btn-lg", :role =>"button" %>
 		</div>
 	</div>
-	<%= link_to 'Edit', edit_vehicle_path(@vehicle),:class => "pull-right btn btn-warning btn-lg active", :role =>"button" %>&nbsp;
+	<%= link_to 'Edit', edit_vehicle_path(@vehicle),:class => "pull-right btn btn-warning btn-lg", :role =>"button" %>&nbsp;
 </div>
+
+

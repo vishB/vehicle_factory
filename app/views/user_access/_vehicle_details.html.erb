@@ -1,0 +1,14 @@
+ <td><%= link_to "#{vehicle.vehicle_type}-#{vehicle.v_identifier}", vehicle %></td>
+  <% if vehicle.vehicle_type == "Shuttle"%>
+    <td><%= vehicle.occupants %></td>
+  <% else%>
+    <td>NA</td>
+  <% end %>
+  <% if vehicle.vehicle_type == "Satellite"%>
+    <td><%= vehicle.payload_weight %></td>
+  <% else%>
+    <td>NA</td>
+  <% end %>
+<td><%= vehicle.construction.start_date.to_date %></td>
+<td><%= vehicle.construction.delivery_date.to_date %></td>   
+<%= hidden_field_tag 'user_id', current_user.id %><br/>

@@ -1,23 +1,29 @@
 <h2>Listing fuels</h2>
-<%= link_to 'New Fuel', new_fuel_path %><br/><%= link_to 'Back', root_path, :class => "pull-right" %><br/><br/>
-<div class="well well-lg">
-  <!-- Table -->
-  <table class="table">
-    <tr>
-      <th>Fuel type</th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-
-    <% @fuels.each do |fuel| %>
+<%= link_to 'New Fuel', new_fuel_path,:title => "Create a new engine", :class => "pull-left btn btn-success btn-lg", :role =>"button" %>
+<%= link_to 'Back', root_path, :class => "pull-right btn btn-primary btn-lg", :role =>"button" %><br/><br/>
+<div class="well well-large" >
+  <%= render_breadcrumbs %>
+  <div class="well well-large alert alert-info" >
+    <!-- Table -->
+    <table class="table table-bordered table-condensed table-striped">
       <tr>
-        <td><%= fuel.fuel_type %></td>
-        <td><%= link_to 'Show', fuel %></td>
-        <td><%= link_to 'Edit', edit_fuel_path(fuel) %></td>
-        <td><%= link_to 'Destroy', fuel, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <th>Fuel type</th>
+        <th></th>
+        <th></th>
       </tr>
-    <% end %>
-  </table>
-</div>
+
+      <% @fuels.each do |fuel| %>
+        <tr>
+          <td><%= link_to "#{fuel.fuel_type}", fuel %></td>
+          <td style="text-align:center;"><%= link_to (image_tag("edit.ico", :width=>"14px",:height=>"14px",:title=>"Edit fuel detail")), edit_fuel_path(fuel) %></td>
+          <% if fuel.engines.blank?%>
+            <td style="text-align:center;"><%= link_to (image_tag("destroy.ico", :width=>"14px",:height=>"14px",:title=>"delete fuel type")), fuel, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <% else%>
+            <td style="text-align:center;"><%= link_to (image_tag("stop.ico", :width=>"16px",:height=>"16px",:title=>"Fuel can't be removed")) %></td>
+          </tr>
+          <% end %>
+      <% end %>
+    </table>
+  </div>
+  </div>
 

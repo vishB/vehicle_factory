@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-	#before_filter :authenticate_user!
+	before_filter :authenticate_user!, :except => [:new,:create]
   
   # GET /users
   # GET /users.json
@@ -16,8 +16,11 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
-    add_breadcrumb "Profile", :users_path
     @user = User.find(params[:id])
+    @vehicles = @user.vehicles
+    @creator = User.all
+    add_breadcrumb "Users", :users_path
+    add_breadcrumb "#{@user.user_detail.first_name} #{@user.user_detail.last_name}", :users_path
 
     respond_to do |format|
       format.html # show.html.erb
@@ -28,9 +31,12 @@ class UsersController < ApplicationController
   # GET /users/new
   # GET /users/new.json
   def new
+    add_breadcrumb "Users", :users_path
     add_breadcrumb "New user", :new_user_path
     @user = User.new
     @user.build_user_detail
+    session[:url] = request.original_url
+    session[:last_url] = request.referrer
 
     respond_to do |format|
       format.html # new.html.erb
@@ -40,6 +46,7 @@ class UsersController < ApplicationController
 
   # GET /users/1/edit
   def edit
+    add_breadcrumb "Users", :users_path
     add_breadcrumb "Edit user", :edit_user_path
     @user = User.find(params[:id])
   end
@@ -64,6 +71,10 @@ class UsersController < ApplicationController
   # PUT /users/1.json
   def update
     @user = User.find(params[:id])
+    if ( params[:user][:password] && params[:user][:password_confirmation] ).blank?
+      params[:user][:password] = @user.password
+      params[:user][:password_confirmation] = @user.password_confirmation
+    end
 
     respond_to do |format|
       if @user.update_attributes(params[:user])
@@ -85,6 +96,7 @@ class UsersController < ApplicationController
     respond_to do |format|
       format.html { redirect_to users_url }
       format.json { head :no_content }
+      format.js   { render :layout => false }
     end
   end
   
@@ -97,15 +109,21 @@ class UsersController < ApplicationController
   # Transfer admin privileges to another user
   def change_admin
     if params[:old_admin] && params[:user_id]
-      #create new admin
-      new_admin = User.find(params[:user_id])
-      new_admin.update_attributes(:admin => true) 
+      unless params[:old_admin] == params[:user_id]
+        #delete old admin
+        old_admin = User.find(params[:old_admin])
+        old_admin.update_attributes(:admin => false)
 
-      #delete old admin
-      old_admin = User.find(params[:old_admin])
-      old_admin.update_attributes(:admin => false)
+        #create new admin
+        new_admin = User.find(params[:user_id])
+        new_admin.update_attributes(:admin => true)
+
+        flash[:notice] = "Your admin priviliges has been changed. You can access your account as a normal user"
+        redirect_to root_path
+      else
+        flash[:error] = "You are already an Admin. Choose another user"
+        redirect_to users_path
+      end   
     end
-    flash[:notice] = "Your admin priviliges has been changed. You can access your account as a normal user"
-    #redirect_to root_path
   end
 end

@@ -11,12 +11,12 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131223125113) do
+ActiveRecord::Schema.define(:version => 20140106083457) do
 
   create_table "constructions", :force => true do |t|
     t.integer  "vehicle_id"
-    t.datetime "start_date"
-    t.datetime "delivery_date"
+    t.date     "start_date"
+    t.date     "delivery_date"
     t.integer  "user_id"
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
@@ -73,6 +73,7 @@ ActiveRecord::Schema.define(:version => 20131223125113) do
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
     t.boolean  "admin",                  :default => false
+    t.integer  "created_by"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email"

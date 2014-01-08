@@ -1,9 +1,3 @@
 $('.delete_vehicle').bind('ajax:success', function() {  
         $(this).closest('tr').fadeOut();
 });
-
-$(document).ready(function() {
-	setTimeout(function() {
-	    $('#notification').fadeOut('slow');
-	}, 3000);
-});	

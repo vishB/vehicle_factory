@@ -1,5 +1,5 @@
-<div class="well well-sm">
-  <%= form_for(@vehicle, :html => {:class => "container"}) do |f| %>
+<div class="well well-large alert-info">
+  <%= form_for(@vehicle) do |f| %>
     <% if @vehicle.errors.any? %>
       <div id="error_explanation">
         <h2><%= pluralize(@vehicle.errors.count, "error") %> prohibited this vehicle from being saved:</h2>
@@ -12,7 +12,7 @@
       </div>
     <% end %>
 
-    <div class="field">
+    <div>
       <%= f.label :vehicle_type %>
       <%= f.select :vehicle_type, @vehicle_types %>
     </div><br />
@@ -24,45 +24,30 @@
       <%= label_tag 'name', 'Power'%>
       <%= text_field_tag :power, nil, :disabled => true %>
     </div><br/>
-    <div class="field" id="occupants">
+    <div id="occupants">
       <%= f.label :occupants %>
       <%= f.number_field :occupants %>
     </div><br />
-    <div class="field" id="payload_weight">
+    <div id="payload_weight">
       <%= f.label :payload_weight_in_kgs %>
       <%= f.text_field :payload_weight %>
     </div><br />
-    <div class="field">
+    <div>
       <%= f.label :vehicle_identifier %>
       <%= f.number_field :v_identifier, :maxlength => 4, :placeholder => "(Four digit number only)" %>
     </div><br />
     <%= f.fields_for :construction do |ff| %>
-      <div id="datetimepicker1" class="input-append date">
+      <div>
         <%= ff.label :start_date %>
-        <%#= ff.text_field :start_date%>
-        <input data-format="dd/MM/yyyy hh:mm:ss" type="text" size="30" name="vehicle[construction_attributes][start_date]" id="vehicle_construction_attributes_start_date">
-        <span class="add-on">
-          <i data-time-icon="icon-time" data-date-icon="icon-calendar">
-          </i>
-        </span>
-      </div><br/>
-
-      <div id="datetimepicker2" class="input-append date">
+        <%= ff.text_field :start_date, :id=> "start_date" %>
+      </div>
+      <div>
         <%= ff.label :delivery_date %>
-        <%#= ff.date_select :delivery_date %>
-        <input data-format="dd/MM/yyyy hh:mm:ss" type="text" size="30" name="vehicle[construction_attributes][delivery_date]" id="vehicle_construction_attributes_delivery_date">
-        <span class="add-on">
-          <i data-time-icon="icon-time" data-date-icon="icon-calendar">
-          </i>
-        </span>
-      </div><br/>
+        <%= ff.text_field :delivery_date, :id=> "delivery_date" %>
+      </div>  
     <% end %>
-    <div class="actions">
+    <div >
       <%= f.submit %>
     </div>
   <% end %>
 </div>
-
-
-
-

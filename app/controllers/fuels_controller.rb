@@ -4,7 +4,7 @@ class FuelsController < ApplicationController
   # GET /fuels.json
   def index
     @fuels = Fuel.all
-
+    add_breadcrumb "Fuels", :fuels_path
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @fuels }
@@ -14,6 +14,8 @@ class FuelsController < ApplicationController
   # GET /fuels/1
   # GET /fuels/1.json
   def show
+    add_breadcrumb "Fuels", :fuels_path
+    add_breadcrumb "Fuel Details", :fuel_path
     @fuel = Fuel.find(params[:id])
 
     respond_to do |format|
@@ -25,6 +27,8 @@ class FuelsController < ApplicationController
   # GET /fuels/new
   # GET /fuels/new.json
   def new
+    add_breadcrumb "Fuels", :fuels_path
+    add_breadcrumb "New fuel", :new_fuel_path
     @fuel = Fuel.new
 
     respond_to do |format|
@@ -35,6 +39,8 @@ class FuelsController < ApplicationController
 
   # GET /fuels/1/edit
   def edit
+    add_breadcrumb "Fuels", :fuels_path
+    add_breadcrumb "Editing fuel", :edit_fuel_path
     @fuel = Fuel.find(params[:id])
   end
 

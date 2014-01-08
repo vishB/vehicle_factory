@@ -1,32 +1,24 @@
 <div class="container">
   <% if user_signed_in? %>
-    <!-- Notifications  -->
-    <% if flash[:error] %>
-      <div class="alert alert-success" id="test">
-        <%=flash[:notice]%>
-      </div>
-    <% elsif notice %> 
-       <div class="alert alert-success" id="test">
-        <%= notice%>
-      </div>
-    <% end %>
-    <!-- Notifications  -->
-    
     <div id="notification"></div>
-    
     <h2>Listing vehicles</h2>
     <% if current_user.admin? %>
-      <%= link_to 'New Vehicle', new_vehicle_path %> 
+      <%= link_to 'New Vehicle', new_vehicle_path, :title => "create a new Vehicle", :class => "pull-left btn btn-success btn-lg", :role =>"button" %> 
     <% else %>    
-      <%= link_to 'Add more vehicles', more_vehicles_path(current_user),:class=>"btn btn-warning btn-lg active", :role => "button"%>
+      <%= link_to 'Add more vehicles', more_vehicles_path(current_user),:class=>"btn btn-success btn-medium", :role => "button"%>
+    <% end %><br/><br/>
+    <% if current_user.admin?%>
+      <%= link_to 'Back', root_path, :class => "pull-right btn btn-primary btn-lg", :role =>"button" %><br/><br/>
     <% end %>
-    <%= link_to 'Back', root_path, :class => "pull-right btn btn-primary btn-lg active", :role =>"button" %><br/><br/>
-      
       <!-- Table -->
-    <div class="well well-lg">
-      <div class="well-lg">
+    <div class="well well-large">
+        <%= render_breadcrumbs %>
+      <div class="well well-large alert-info">
         <%= render 'vehicles_list' %>
       </div>  
-    </div>
+    </div> 
   <%end%>
 </div>
+
+
+

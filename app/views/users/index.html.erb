@@ -1,45 +1,83 @@
+<div class="notification"></div>
+<div id="divdeps" style="display:none" title=""></div>
+
 <h2>Listing users</h2>
 
-<%= link_to 'New user', new_user_path %><%= link_to 'Back', root_path, :class => "pull-right" %><br/><br/>
+<%= link_to 'New user', new_user_path, :title => "create a new user", :class => "pull-left btn btn-success btn-lg", :role =>"button"  %>
+<%= link_to 'Back', root_path, :class => "pull-right btn btn-primary btn-lg", :role =>"button" %><br/><br/>
 
-<div class="well well-lg">
-  <!-- Table -->
-  <table class="table">
+<div class="well well-large">
+  <%= render_breadcrumbs %>
+  <%= form_tag change_admin_users_path(:old_admin => current_user.id) do %>
+    <div class="well well-large alert-info">
+      <!-- Table -->
+      <table class="table table-bordered table-condensed table-striped alert-info">
+        <tr>
+          <th></th>
+          <th>User</th>
+          <th>Age</th>
+          <th>Sex</th>
+          <th>Phone</th>
+          <th>Email</th>
+          <th>Created by</th>
+          <th></th>
+          <th></th>
+        </tr>
 
-    <tr>
-      <th>First Name</th>
-      <th>Last Name</th>
-      <th>Age</th>
-      <th>Sex</th>
-      <th>Phone</th>
-      <th>Email</th>
-      <th>Created by</th>
-      <th>Actions</th>
-    </tr>
-    <% @users.each do |user| %>
-      <tr>
-        <td><%= user.user_detail.first_name %></td>
-        <td><%= user.user_detail.last_name %></td>
-        <td><%= user.user_detail.age %></td>
-        <td><%= user.user_detail.sex %></td>
-        <td><%= user.user_detail.phone %></td>
-        <td><%= user.email %></td>
-    
-        <% if user.admin %>
-          <td><%= "Admin" %></td>
-        <% else %>
-          <td><%= "User" %></td>
+        <% @users.each do |user| %>
+          <tr>
+            <% if user.admin?%>
+              <td><%=radio_button_tag 'user_id', user.id, true, options = {}%></td>
+              <td><%= link_to "#{user.user_detail.first_name} #{user.user_detail.last_name}(Admin)", user %></td>
+            <% else %>
+              <td><%=radio_button_tag 'user_id', user.id, false, 
+            options = {}%></td>  
+              <td><%= link_to "#{user.user_detail.first_name} #{user.user_detail.last_name}", user %></td>
+            <% end %>
+            <td><%= user.user_detail.age %></td>
+            <td><%= user.user_detail.sex %></td>
+            <td><%= user.user_detail.phone %></td>
+            <td><%= user.email %></td>
+            <td><%= User.creator(user) %></td>
+            <% if current_user.admin? %>  
+              <td><%= link_to (image_tag("edit.ico",:width=>"14px",:height=>"14px", :title => "Edit user details")), edit_user_path(user) %></td>
+              <% unless user.admin?%>
+                <td>
+                <%= link_to (image_tag("destroy.ico",:width=>"14px",:height=>"14px",:title => "Delete user")), user, method: :delete, data: 
+                  { confirm: "Are you sure you want to remove user #{user.user_detail.first_name} #{user.user_detail.last_name} from the system ?" }, :remote => true, :class => 'delete_user' %>
+                </td>
+              <% else %>
+                <td><%= image_tag("stop.ico", :width=>"16px",:height=>"16px",:id => "stop", :title => "Admin can't be deleted")
+              %></td>  
+              <% end %>
+            <% end %>
+          </tr>    
         <% end %>
-
-        <% if current_user.admin? %>  
-          <td><%= link_to 'Show', user %></td>
-          <td><%= link_to 'Edit', edit_user_path(user) %></td>
-          <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %>
-          </td>
-        <% end %>
-      </tr>    
-    <% end %>
-  </table>
-</div>
-
-
+      </table>
+      <!-- Button trigger modal -->
+      <button class="btn btn-primary btn-lg pull-right" data-toggle="modal" data-target="#myModal">
+        Make Admin
+      </button><br/>
+    </div>
+  </div>
+      
+  <!-- Modal -->
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title" id="myModalLabel">Transfer Admin privileges</h4>
+        </div>
+        <div class="modal-body">
+          <p>Are you sure you want to transfer your 'Admin Privileges'?</p><br/>
+          <p>Press 'Ok' to continue or 'Cancel' to exit</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+          <%= submit_tag 'Ok', :class=>"btn btn-primary", :id=>"make-admin"%>
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
+<% end %>

@@ -1,56 +1,59 @@
 <!DOCTYPE html>
 <html>
-	<head>
-	  <title>Factory</title>
-	  <%= stylesheet_link_tag "application", :media => "all" %>
-	  <%= javascript_include_tag "application" %>
-	  <%= csrf_meta_tags %>
-	</head>
+  <head>
+    <title>Factory</title>
+    <%= stylesheet_link_tag "application", :media => "all" %>
+    <%= javascript_include_tag "application" %>
+    <%= csrf_meta_tags %>
+  </head>
 
-
-
-  
-
-    <div class="navbar navbar-static">
-
-        <div class="navbar-inner">
-
-            <%= link_to 'Space Vehicle Factory', root_path, :class =>"brand" %>
-
+  <div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+      <div class="container">
+      <%= link_to 'Space Vehicle Factory', root_path, :class =>"brand" %>
+      <% if user_signed_in? %>
+        <% if current_user.admin? %>
+          <ul class="nav">
+            <li><%= link_to 'Users', users_path %></li>
+            <li><%= link_to 'Vehicles', vehicles_path %></li>
+            <li><%= link_to 'Vehicle types', vehicle_types_path %></li>
+            <li><%= link_to 'Engines', engines_path %></li>
+            <li><%= link_to 'Fuels', fuels_path %></li>
+          </ul>
+          <ul class="nav pull-right">
+            <li><div class="nav-top">Logged in as Admin | <%= link_to 'Logout', destroy_user_session_path, method: :delete%></div></li></ul>
+          <% else %>
             <ul class="nav">
-                <!-- <li><a href="#">Home</a></li> -->
-            </ul>
-
-            <ul class="nav pull-right">
-            	<% if user_signed_in? %>
-	  	  				<% if current_user.admin? %>
-		      				<li><div style="margin-top:9px;">Logged in as Admin | <%= link_to 'Logout', destroy_user_session_path, method: :delete%></div></li>
-    						<% else %>  
-		      				<li><div style="margin-top:9px;">Logged in as <%=current_user.user_detail.first_name%> | <%= link_to 'Logout', destroy_user_session_path, method: :delete%></div></li>
-								<% end %>  
-							<% end %>  
-
-                <!-- <li><a href="#">Admin</a></li> -->
-
-            </ul>
-
-        </div>
-
-    </div><br/><br/><br/>
-   
-
-	<body>
-	  <div class="container">
-		  <%= yield %>
-		</div> 
-	</body>
-	  <div class="footer">
-  		<% if user_signed_in?%>
-	  		<p><%= link_to 'Add new users', new_user_path, method: :delete, :class => "btn btn-primary btn-lg active", :role=>"button" %> or <%= link_to 'Login as another user',destroy_user_session_path, method: :delete, :class => "btn btn-primary btn-lg active", :role=>"button" %></p> 
-			<% else %>
-				<p><%= link_to 'Add new users', new_user_path, :class => "btn btn-primary btn-lg active", 
-	  		:role=>"button" %> or <%= link_to 'Login as another user',new_user_session_path, :class => "btn btn-primary btn-lg active", 
-	  		:role=>"button" %></p> 
-			<% end %>
+              <li><%= link_to 'Vehicles', vehicles_path %></li>
+              <li><%= link_to 'My profile', current_user %></li></ul>
+            <ul class="nav pull-right">  
+              <li><div class="nav-top">
+                Logged in as <%=current_user.user_detail.first_name%> | <%= link_to 'Logout', destroy_user_session_path, method: :delete%></div></li>
+            </ul>  
+          <% end %>  
+      <% end %>  
     </div>
+    </div>
+    <% if user_signed_in? %>
+     <%- flash.each do |name, msg| -%>
+      <div class="alert alert-success center-text" id="test">
+        <%= content_tag :div, msg, :id => "flash_#{name}" if msg.is_a?(String) %>
+      </div>
+    <%- end -%>
+    <% end %>
+  </div><br/><br/>
+  
+  <body class="master-color">
+    <div class="container container-spacing">
+
+      <%= yield %>
+    </div> 
+  </body>
+
+  <div class="footer" >
+    <% if user_signed_in?%>
+      <p><%= link_to 'Add new users', new_user_path, :class => "btn btn-primary btn-lg", :role=>"button" %> or <%= link_to 'Login as another user',destroy_user_session_path, method: :delete, :class => "btn btn-primary btn-lg", :role=>"button" %></p> 
+    <% end %>
+  </div>
 </html>
+

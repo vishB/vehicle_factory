@@ -1,15 +1,15 @@
-<p id="notice"><%= notice %></p>
 
-<p>
-  <b>Fuel type:</b>
-  <%= @fuel.fuel_type %>
-</p>
+<h2><%= "#{@fuel.fuel_type}" %></h2>
+<%= link_to 'Back', fuels_path, :class => "pull-right btn btn-primary btn-lg", :role =>"button" %><br/></br/>
 
-<p>
-  <b>Engine:</b>
-  <%= @fuel.engine_id %>
-</p>
+<div class="well well-sm">
+  <%= render_breadcrumbs%>
+  <div class="well well-sm"> 
+    <p>
+      <b>Fuel type:</b>
+      <%= @fuel.fuel_type %>
+    </p>
+  </div>
+</div>
 
 
-<%= link_to 'Edit', edit_fuel_path(@fuel) %> |
-<%= link_to 'Back', fuels_path %>

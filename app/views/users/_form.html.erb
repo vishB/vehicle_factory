@@ -1,59 +1,81 @@
-<%# @user.build_user_detail %>
-<%= form_for(@user) do |f| %>
-  <% if @user.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
-      <ul>
-      <% @user.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
+<div class="well well-lg form-horizontal alert alert-info" style="padding-left: 285px;padding-top: 60px;">
+  <%= form_for(@user) do |f| %>
+    <% if @user.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+        <ul>
+        <% @user.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="control-group">
+      <%= f.label :email, :class => "control-label", :style=>"text-align:left;" %>
+      <div class="controls">
+        <%= f.email_field :email, :class => "input-xlarge", :autofocus => true %>
+      </div>
+      <% if @user.created_by.blank? && user_signed_in? %>
+        <%= f.hidden_field :created_by, :value => "#{current_user.id}" %>
+      <% else %>
+        <%= f.hidden_field :created_by, :value => 0.to_i %>          
+      <% end %>        
+    </div><br/>
+
+    <div class="control-group">
+      <%= f.label :password, :class => "control-label", :style=>"text-align:left;" %>
+      <div class="controls">
+        <%= f.password_field :password, :class => "input-xlarge" %>
+      </div>  
+    </div><br />
+    <div class="control-group">
+      <%= f.label :password_confirmation, :class => "control-label", :style=>"text-align:left;" %>
+      <div class = "controls">
+        <%= f.password_field :password_confirmation, :class => "input-xlarge" %>
+      </div>  
+    </div><br />
+
+    <%= f.fields_for :user_detail do |detail| %>
+      <div class="control-group">
+        <%= detail.label :first_name, :class => "control-label", :style=>"text-align:left;" %>
+        <div class="controls">
+          <%= detail.text_field :first_name, :class => "input-xlarge", :maxlength => 30 %>
+        </div>  
+      </div><br />
+
+      <div class="control-group">
+        <%= detail.label :last_name, :class => "control-label", :style=>"text-align:left;" %>
+        <div class="controls">
+          <%= detail.text_field :last_name, :class => "input-xlarge", :maxlength => 30 %>
+        </div>  
+      </div><br />
+
+      <div class="control-group">
+        <%= detail.label :age, :class => "control-label", :style=>"text-align:left;" %>
+        <div class="controls">
+          <%= detail.text_field :age, :class => "input-xlarge", :maxlength => 3 %>
+        </div>
+      </div></br>
+
+      <div class="control-group">
+        <%= detail.label :Gender, :class => "control-label", :style=>"text-align:left;" %>
+        <div class="controls">
+        <%= detail.select :sex, options_for_select(["Male", "Female"]), :class => "input-xlarge"%>
+        </div>
+      </div></br>
+
+      <div class="control-group">
+        <%= detail.label :phone, :class => "control-label", :style=>"text-align:left;" %>
+        <div class="controls">
+          <%= detail.text_field :phone, :class => "input-xlarge", :maxlength => 10 %>
+        </div>  
+      </div></br>
+
+      <div class="actions">
+        <%= f.submit(:class => "btn btn-primary pull-right") %>
+      </div>
+    <%end%>
   <% end %>
+</div>  
 
-  <div class="field">
-    <%= f.label :email %>
-    <%= f.email_field :email, :autofocus => true %>
-  </div><br/>
-  <div class="field">
-    <%= f.label :password %>
-    <%= f.password_field :password %>
-  </div><br />
-  <div class="field">
-    <%= f.label :password_confirmation %>
-    <%= f.password_field :password_confirmation %>
-  </div><br />
-  
-
-  <%= f.fields_for :user_detail do |detail| %>
-    <div class="field">
-      <%= detail.label :first_name %>
-      <%= detail.text_field :first_name %>
-    </div><br />
-
-    <div class="field">
-      <%= detail.label :last_name %>
-      <%= detail.text_field :last_name %>
-    </div><br />
-
-    <div>
-      <%= detail.label :age %>
-      <%= detail.text_field :age %>
-    </div></br>
-
-    <div>
-      <%= detail.label :sex %>
-      <%= detail.select :sex, options_for_select([["Select One", ""],"Male", "Female"])%>
-    </div></br>
-
-    <div>
-      <%= detail.label :phone %>
-      <%= detail.text_field :phone %>
-    </div></br>
-
-    <div class="actions">
-      <%= f.submit %>
-    </div>
-  <%end%>
-  
-<% end %>

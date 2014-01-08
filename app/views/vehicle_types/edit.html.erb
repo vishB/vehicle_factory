@@ -1,6 +1,6 @@
-<h1>Editing vehicle_type</h1>
-
-<%= render 'form' %>
-
-<%= link_to 'Show', @vehicle_type %> |
-<%= link_to 'Back', vehicle_types_path %>
+<h2>Editing vehicle type</h2>
+<%= link_to 'Back', vehicle_types_path, :class=>"pull-right btn btn-primary btn-lg", :role =>"button" %><br/><br/>
+<div class="well well-large">
+  <%= render_breadcrumbs %>
+  <%= render 'form' %>
+</div> 
