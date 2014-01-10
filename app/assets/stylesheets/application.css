@@ -100,14 +100,14 @@ label.required:after{content:"*"}
 }
 
 .wrapper{
-	margin-bottom: 20px;
-	min-height: 20px;
-	padding: 19px;
 	background-color: #F5F5F5;
-	border-radius: 29px 29px 29px 29px;
-	border-style: solid;
-	border-width: 1.3px;
-	box-shadow: 10px 10px 5px #413F24;
+    border-radius: 10px 10px 10px 10px;
+    border-style: solid;
+    border-width: 1.3px;
+    box-shadow: 4px 5px 22px #5AA8E6;
+    margin-bottom: 20px;
+    min-height: 20px;
+    padding: 19px;
 }
 
 .thumb-back{

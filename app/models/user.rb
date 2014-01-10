@@ -11,6 +11,8 @@ class User < ActiveRecord::Base
   accepts_nested_attributes_for :user_detail
   has_many :user_accesses
   has_many :vehicles, through: :user_accesses 
+  validates :email, :password, :password_confirmation, :presence => true
+  validates :email, :uniqueness => true
 
   # The first registered user in the system should be admin.
   def self.one_admin

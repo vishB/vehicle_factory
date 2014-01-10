@@ -1,29 +1,5 @@
 class UserAccessController < ApplicationController
   before_filter :authenticate_user!
- #  # Unshare shared vehicle.
-	# def unshare_vehicle
- #    if params[:vehicle_id] && params[:shared_by] && params[:id]
- #      @vehicle = UserAccess.where(:user_id => params[:id],:vehicle_id => params[:vehicle_id], :shared_by => params[:shared_by]).first
- #      @vehicle.destroy
- #      flash[:notice] = "Vehicle unshared"
- #    end
-
- #    respond_to do |format|
- #      format.js   { render :layout => false }
- #    end  
- #  end  
-
- #  # Share vehicles with other users.
- #  def share_vehicle
- #    if params[:vehicle_id] && params[:shared_by] && params[:id]
- #      @vehicle = UserAccess.create(:user_id => params[:id],:vehicle_id => params[:vehicle_id], :shared_by => params[:shared_by])
- #      flash[:notice] = "Vehicle shared"
- #    end
-
- #    respond_to do |format|
- #      format.js   { render :layout => false }
- #    end  
- #  end# End of method share_vehicle.
 
   # Admin can allocate vehicles to users.
 	def allocate_users

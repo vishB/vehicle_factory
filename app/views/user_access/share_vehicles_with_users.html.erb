@@ -1,5 +1,5 @@
 <h2>Share <%="#{@vehicle.first.vehicle_type}-#{@vehicle.first.v_identifier}"%> with users</h2>
-<%=link_to 'Back',vehicles_path,:class=>"pull-right btn btn-primary", :role => "button"%><br><br>
+<%=link_to 'Back',vehicles_path,:class=>"pull-right btn btn-primary", :role => "button"%>
     <div class="tabbable well well-large"> <!-- Only required for left/right tabs -->
       <%= render_breadcrumbs%>
       <ul class="nav nav-tabs">
@@ -51,7 +51,7 @@
             <%=hidden_field_tag 'vehicle_id', @vehicle.first.id %>
             <%=hidden_field_tag 'shared_by', current_user.id%>
 
-              <div class="well well-large alert alert-info">
+              <div class="">
                 <table class="table table-condensed table-bordered table-striped">
                   <tr>
                     <th>User</th>
