@@ -4,8 +4,14 @@ gem 'rails', '3.2.15'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
+group :development,:test do
+  gem 'sqlite3'
+end
 
-gem 'sqlite3'
+group :production do
+  gem 'pg'
+  #gem 'rails_12factor'
+end  
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -26,7 +32,13 @@ gem 'jquery-validation-rails'
 gem "jquery-ui-rails", "~> 4.1.1"
 gem "breadcrumbs_on_rails"
 
+group :development,:test do
+  gem "rspec-rails", "~> 2.14.1"
+end
 
+group :test do 
+  gem 'factory_girl_rails'
+end
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
