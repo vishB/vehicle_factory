@@ -22,15 +22,15 @@
           </ul>
           <ul class="nav pull-right">
             <li><div class="nav-top">Logged in as Admin | <%= link_to 'Logout', destroy_user_session_path, method: :delete%></div></li></ul>
-          <% else %>
-            <ul class="nav">
-              <li><%= link_to 'Vehicles', vehicles_path %></li>
-              <li><%= link_to 'My profile', current_user %></li></ul>
-            <ul class="nav pull-right">  
-              <li><div class="nav-top">
-                Logged in as <%=current_user.user_detail.first_name%> | <%= link_to 'Logout', destroy_user_session_path, method: :delete%></div></li>
-            </ul>  
-          <% end %>  
+        <% else %>
+          <ul class="nav">
+            <li><%= link_to 'Vehicles', vehicles_path %></li>
+            <li><%= link_to 'My profile', current_user %></li></ul>
+          <ul class="nav pull-right">  
+            <li><div class="nav-top">
+              Logged in as <%=current_user.user_detail.first_name%> | <%= link_to 'Logout', destroy_user_session_path, method: :delete%></div></li>
+          </ul>  
+        <% end %>  
       <% end %>  
     </div>
     </div>

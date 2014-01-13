@@ -28,7 +28,7 @@
           <tr>
             <td><%= link_to "#{vehicle_type.kind}", vehicle_type %></td>
             <td><%= link_to (image_tag("edit.ico",:width=>"14px",:height=>"14px")), edit_vehicle_type_path(vehicle_type) %></td>
-            <td><%= link_to (image_tag("destroy.ico",:width=>"14px",:height=>"14px")), vehicle_type, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            <td><%#= link_to (image_tag("destroy.ico",:width=>"14px",:height=>"14px")), vehicle_type, method: :delete, data: { confirm: 'Are you sure?' },:remote => true, :class => "delete_vehicle_type" %></td>
           </tr>
         <% end %>
       </table>
@@ -37,5 +37,3 @@
     <br />
   <% end %>
 </div>
-
-

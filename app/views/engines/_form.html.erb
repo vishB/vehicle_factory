@@ -16,7 +16,7 @@
     <%= f.select :power_rating, 0..90 %>
   </div>
   <div class="field">
-    <%= f.hidden_field :model, :value => "ENG-M-#{Time.now.strftime("%G-W%V%u-T%H%M")}" %>
+    <%= f.hidden_field :model, :value => "ENG-M-#{Time.now.strftime("%G-W%V%u-T%H%M%S")}" %>
   </div>
   <div class="field">
     <%= f.label :fuel_type %><br />

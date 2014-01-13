@@ -8,19 +8,12 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 # Create basic vehicle types.
-vehicle_types = VehicleType.all
-fuel_types = Fuel.all
 
-if vehicle_types.blank?
-	vehicle_types = ["Satellite", "Shuttle"]
-	vehicle_types.each do |kind|
-  	VehicleType.create( kind: kind )
-  end  	
-end	
+	VehicleType.create( kind: 'Satellite' )
+  VehicleType.create( kind: 'Shuttle' )
 
-if fuel_types.blank?
-	fuel_types = ["Chemical”, “Antimatter”, “Gasoline"]
-	fuel_types.each do |fuel|
-		Fuel.create( fuel_type: fuel )
-	end
-end	
+# Create basic fuel types.
+
+	Fuel.create( fuel_type: 'chemical' )
+  Fuel.create( fuel_type: 'Antimatter' )
+  Fuel.create( fuel_type: 'Gasoline' )

@@ -1,9 +1,7 @@
 Factory::Application.routes.draw do
   resources :engines
 
-
   resources :fuels
-
 
   resources :vehicle_types
 
@@ -22,10 +20,8 @@ Factory::Application.routes.draw do
 
   resources :user_details
 
-
   resources :constructions
 
-  
   resources :vehicles do
     member do
       get 'info'

@@ -4,7 +4,7 @@ require 'spec_helper'
 describe User do
   it "system should have an admin" do
     admin = User.where(:admin => true)
-    expect admin.blank? == false
+    expect admin.blank?
   end
 end
 
@@ -20,7 +20,7 @@ end
 describe User do
   it "user should have email" do 
     user_email = User.where(:email => nil)
-    expect user_email.blank? == false
+    expect user_email.blank? == true
   end    
 end
 
