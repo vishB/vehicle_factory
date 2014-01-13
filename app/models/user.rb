@@ -14,17 +14,6 @@ class User < ActiveRecord::Base
   validates :email, :password, :password_confirmation, :presence => true
   validates :email, :uniqueness => true
 
-  # The first registered user in the system should be admin.
-  # def self.one_admin
-  #   first_user = User.all.first
-  #   user =  User.all[1]
-
-  #   if user.blank? && !first_user.blank? 
-  #     user = User.first
-  #     user.update_attributes(:admin => true)
-  #   end
-  # end
-
   #find the user creator
   def self.creator(user)
     unless user.created_by.blank? || user.created_by == 0.to_i

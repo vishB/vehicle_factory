@@ -32,11 +32,7 @@ end
 
 describe User do
   it "should have unique email for every user" do
-  end
-end
-
-describe User do
-  it "should have age as numeric value" do
+    FactoryGirl.build(:user, email: "test").should_not be_valid
   end
 end
 

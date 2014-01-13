@@ -16,3 +16,14 @@ FactoryGirl.define do
     f.occupants 20
   end  
 end
+
+FactoryGirl.define do
+  factory :user_detail do |f|
+    f.sequence(:user_id) { |i| i} 
+    f.sequence(:first_name) {|i| "Foo#{i}"} 
+    f.sequence(:last_name) {|i| "Foo#{i}"} 
+    f.sequence(:age) { |i| i*10}
+    f.sex "Male"
+    f.sequence(:phone) { |n| 986857843 + n}
+  end
+end

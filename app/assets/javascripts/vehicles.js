@@ -73,6 +73,6 @@ $(document).ready(function() {
     $( "#start_date" ).datepicker({ minDate: 0, maxDate: "+1M +10D",dateFormat: 'D, dd M yy' });
     $( "#delivery_date" ).datepicker({ minDate: 0, maxDate: "+1M +10D",dateFormat: 'D, dd M yy' });
   });
-
+});
 
 
