@@ -1,7 +1,5 @@
 class SiteController < ApplicationController
   def index
-  	User.one_admin # First registered user should be admin
-
   	# Check if user has logged in.
     if user_signed_in?
       redirect_to vehicles_path unless current_user.admin?
