@@ -85,6 +85,7 @@ class FuelsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to fuels_url }
       format.json { head :no_content }
+      format.js { render :layout => false }
     end
   end
 end
