@@ -54,11 +54,14 @@ class UsersController < ApplicationController
   # POST /users
   # POST /users.json
   def create
+    if User.first.blank?
+      params[:user][:admin]=true
+    end
     @user = User.new(params[:user])
 
     respond_to do |format|
       if @user.save
-        format.html { redirect_to @user, notice: 'user was successfully created.' }
+        format.html { redirect_to root_path, alert: 'user was successfully created.' }
         format.json { render json: @user, status: :created, location: @user }
       else
         format.html { render action: "new" }
@@ -112,11 +115,11 @@ class UsersController < ApplicationController
       unless params[:old_admin] == params[:user_id]
         #delete old admin
         old_admin = User.find(params[:old_admin])
-        old_admin.update_attributes(:admin => false)
+        old_admin.update_attribute(:admin, false)
 
         #create new admin
         new_admin = User.find(params[:user_id])
-        new_admin.update_attributes(:admin => true)
+        new_admin.update_attribute(:admin, true)
 
         flash[:notice] = "Your admin priviliges has been changed. You can access your account as a normal user"
         redirect_to root_path
