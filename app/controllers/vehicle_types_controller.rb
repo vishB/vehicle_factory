@@ -17,6 +17,7 @@ class VehicleTypesController < ApplicationController
   def show
     @vehicle_type = VehicleType.find(params[:id])
     add_breadcrumb "Vehicle types", :vehicle_types_path
+    add_breadcrumb "#{@vehicle_type.kind}", :vehicle_types_path
 
     respond_to do |format|
       format.html # show.html.erb
@@ -82,6 +83,7 @@ class VehicleTypesController < ApplicationController
     respond_to do |format|
       format.html { redirect_to vehicle_types_url }
       format.json { head :no_content }
+      format.js { render :layout => false}
     end
   end
 end
