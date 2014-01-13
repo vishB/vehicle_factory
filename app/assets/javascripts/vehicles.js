@@ -66,11 +66,13 @@ $(document).ready(function() {
           required: "Required",
           endate_greater_startdate: "Delivery date cannot be in past."
         }
-      }
+      },  
   });
 
   $(function() {
-    $( "#start_date" ).datepicker({ minDate: 0, maxDate: "+1M +10D" });
-    $( "#delivery_date" ).datepicker({ minDate: 0, maxDate: "+1M +10D" });
+    $( "#start_date" ).datepicker({ minDate: 0, maxDate: "+1M +10D",dateFormat: 'D, dd M yy' });
+    $( "#delivery_date" ).datepicker({ minDate: 0, maxDate: "+1M +10D",dateFormat: 'D, dd M yy' });
   });
-});
+
+
+

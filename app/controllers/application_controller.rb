@@ -28,9 +28,4 @@ class ApplicationController < ActionController::Base
     all_users = User.all
     @available_users = all_users - vehicle_users
   end
-
-  #find users working on selected vehicle  
-  def get_allocated_users(vehicle)
-
-  end
 end
