@@ -37,32 +37,26 @@ $(window).load(function(){
 $(document).ready(function() {
 
   $.validator.addMethod("endate_greater_startdate", function(value, element) {
-    return $('#start_date').val() > $('#delivery_date').val()
-  }, "* Delivery date should be greater than Start date");
+    return vehicle[construction_attributes][start_date] > vehicle[construction_attributes][start_date]
+}, "* Enddate should be greater than Startdate");
 
   $("#new_vehicle").validate({
       onsubmit: true,
       errorClass: 'got_error',
       rules: {
-        "vehicle[v_identifier]":{
-          required: true,
-          number: true,
-          minlength: 4
-        },
-        "start_date":{
+        "vehicle[construction_attributes][start_date]":{
           required:true
         },
-        "delivery_date":{
+        "vehicle[construction_attributes][delivery_date]":{
           required:true,
           endate_greater_startdate:true
         }
       },
       messages: {
-        "vehicle[v_identifier]":{
+        "vehicle[construction_attributes][start_date]":{
           required: "Required",
-          number: "Identifier must be a number"
         },
-        "delivery_date":{
+        "vehicle[construction_attributes][delivery_date]":{
           required: "Required",
           endate_greater_startdate: "Delivery date cannot be in past."
         }
