@@ -6,7 +6,7 @@ class CreateUserDetails < ActiveRecord::Migration
       t.string :last_name
       t.integer :age
       t.string :sex
-      t.integer :phone
+      t.integer :phone, :limit => 8
 
       t.timestamps
     end
