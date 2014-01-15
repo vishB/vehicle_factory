@@ -35,11 +35,17 @@
     </div>
     </div>
     <% if user_signed_in? %>
-     <%- flash.each do |name, msg| -%>
-      <div class="alert alert-success center-text" id="test">
-        <%= content_tag :div, msg, :id => "flash_#{name}" if msg.is_a?(String) %>
-      </div>
-    <%- end -%>
+      <%- flash.each do |name, msg| -%>
+        <% if name == :error %>
+          <div class="alert alert-error center-text" id="test">
+            <%= content_tag :div, msg, :id => "flash_#{name}" if msg.is_a?(String) %>
+          </div>
+        <% else %>
+          <div class="alert alert-success center-text" id="test">
+            <%= content_tag :div, msg, :id => "flash_#{name}" if msg.is_a?(String) %>
+          </div> 
+        <% end %>  
+      <%- end -%>
     <% end %>
   </div><br/><br/>
   
