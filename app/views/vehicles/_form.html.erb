@@ -18,7 +18,7 @@
     </div>
     <div>
       <%= f.label :vehicle_engine %>
-      <%= f.select :engine_id, @engines%>
+      <%= f.collection_select :engine_id, @engines, :id, :model %>
     </div>
     <div>
       <%= label_tag 'name', 'Power'%>
@@ -26,21 +26,23 @@
     </div>
     <div id="occupants">
       <%= f.label :occupants %>
-      <%= f.number_field :occupants, :class=>"numeric_only" %>
+      <%= f.number_field :occupants, :class=>"numeric_only" %><abbr title="required"> *</abbr>
     </div>
     <div id="payload_weight">
       <%= f.label :payload_weight_in_kgs %>
       <%= f.text_field :payload_weight, :readonly => true %>
-      <%= f.hidden_field :v_identifier,:value => "#{Vehicle.get_identifier}"%>
+      <%= f.hidden_field :v_identifier %>
     </div>
     <%= f.fields_for :construction do |ff| %>
       <div>
         <%= ff.label :start_date %>
         <%= ff.text_field :start_date, :id=> "start_date", :placeholder => "Start date" %>
+        <abbr title="required"> *</abbr>
       </div>
       <div>
         <%= ff.label :delivery_date %>
         <%= ff.text_field :delivery_date, :id=> "delivery_date", :placeholder => "End date" %>
+        <abbr title="required"> *</abbr>
       </div>  
     <% end %>
     <div >
