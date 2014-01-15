@@ -34,8 +34,8 @@
             <td><%= image_tag("stop.ico", :width=>"16px",:height=>"16px",:id => "stop", :title => "Vehicle still under construction")
             %></td>
           <% else %>  
-            <td><%= link_to (image_tag("destroy.ico",:width=>"14px",:height=>"14px",:title => "Delete Vehicle")), vehicle, method: :delete, data: 
-              { confirm: "Are you sure you want to remove #{vehicle.vehicle_type}-#{vehicle.v_identifier} from you vehicles list ?" }, :remote => true, :class => 'delete_vehicle','data-type' => 'json' %></td>
+            <td><%= link_to (image_tag("destroy.ico",:width=>"14px",:height=>"14px",:title => "Delete Vehicle")), vehicle, :method => :delete, data: 
+              { confirm: "Are you sure you want to remove #{vehicle.vehicle_type}-#{vehicle.v_identifier} from you vehicles list ?" }, :remote => true, :class => 'delete_vehicle' %></td>
            <% end %>   
           <% if current_user.admin? %>
             <td><%= link_to 'Share/Unshare', share_vehicles_with_users_path(vehicle),:title => "Allocate vehicles to users" %></td>

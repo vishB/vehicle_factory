@@ -16,7 +16,7 @@ class Vehicle < ActiveRecord::Base
     if last_identifier.blank?
       identifier = 1000
     else
-      identifier = last_identifier.v_identifier + 1
+      identifier = self.maximum("v_identifier") + 1
     end
   end
 end

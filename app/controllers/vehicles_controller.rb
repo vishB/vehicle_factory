@@ -1,5 +1,7 @@
 class VehiclesController < ApplicationController
   before_filter :authenticate_user!
+  before_filter :check_dates, :only => [:create]
+
   # GET /vehicles
   # GET /vehicles.json
   def index
@@ -54,9 +56,12 @@ class VehiclesController < ApplicationController
   # POST /vehicles
   # POST /vehicles.json
   def create
-    #get_list
-    engine = Engine.where(:model => params[:vehicle][:engine_id] )
-    params[:vehicle][:engine_id] = engine.first.id
+    get_list
+    if params[:vehicle][:vehicle_type] == "Shuttle"
+      params[:vehicle][:payload_weight] = nil
+    end
+    # engine = Engine.where(:id => params[:vehicle][:engine_id] )
+    params[:vehicle][:v_identifier] = Vehicle.get_identifier
     @vehicle = Vehicle.new(params[:vehicle])
 
     respond_to do |format|
@@ -73,6 +78,10 @@ class VehiclesController < ApplicationController
   # PUT /vehicles/1
   # PUT /vehicles/1.json
   def update
+    get_list
+    if params[:vehicle][:vehicle_type] == "Shuttle"
+      params[:vehicle][:payload_weight] = nil
+    end
     @vehicle = Vehicle.find(params[:id])
 
     respond_to do |format|
@@ -91,18 +100,20 @@ class VehiclesController < ApplicationController
   def destroy
     @vehicle = Vehicle.find(params[:id])
     vehicle = "#{@vehicle.vehicle_type}"+'-'+"#{@vehicle.v_identifier.to_s}"
-    if @vehicle.construction.delivery_date < Time.now
-      respond_to do |format|
+
+    #Delete vehicle only if its delivery date has not passed yet
+    respond_to do |format|
+      #if @vehicle.construction.delivery_date < Time.now.to_date
         if @vehicle.destroy
-          flash[:notice] = " Vehicle deleted successfully."
           format.html { redirect_to vehicles_url }
-          format.js { render :json => {:vehicle => "#{vehicle}"}}
-        else
-          flash[:error] = "Sorry! Vehicle delivery date has not passed yet."
-          format.html { render action: "index" }
-        end
-      end 
-    end
+          format.json { head :no_content }
+          format.js { render :layout => false }
+        end 
+      #else
+      #   flash[:error] = "Sorry! Vehicle cannot be deleted as delivery date has not passed yet."
+      #   format.html { render action: "index" }  
+      # end
+    end  
   end
   
   # Vehicle information JSON response 
@@ -135,10 +146,25 @@ class VehiclesController < ApplicationController
 
   def engine_data 
     if params[:engine_model]
-      @power = Engine.where(:model => params[:engine_model]).first.power_rating
+      @power = Engine.where(:id => params[:engine_model]).first.power_rating
       respond_to do |format|
         format.js { render :layout => false, :locals => {:power => @power} } 
       end
     end
-  end  
+  end
+
+  def check_dates
+    if params[:vehicle][:construction_attributes]
+      start_date = params[:vehicle][:construction_attributes].values.first
+      delivery_date = params[:vehicle][:construction_attributes].values.last
+     
+      if start_date.to_date > delivery_date.to_date
+        respond_to do |format|
+          flash[:error] = "Error! Delivery date less than start date."
+          format.html { redirect_to new_vehicle_path }
+          format.json { head :no_content }
+        end
+      end
+    end
+  end
 end

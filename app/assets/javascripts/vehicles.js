@@ -1,22 +1,5 @@
 $(window).load(function(){
 
-  // Hiding and showing attributes for vehicles
-  $("#vehicle_vehicle_type").val() =='Satellite'
-  $("#payload_weight").show();
-  $("#occupants").hide();
-
-  $( "#vehicle_vehicle_type" ).change(function() {
-    if ($("#vehicle_vehicle_type").val() == 'Shuttle'){
-      $("#payload_weight").hide();
-      $("#occupants").show();
-    }
-    else if ($("#vehicle_vehicle_type").val() == 'Satellite'){
-      
-      $("#payload_weight").show();
-      $("#occupants").hide();
-    }
-  });
-
   //AJAX call for getting engine power and payload on page load.
    $.ajax({
         type: "GET",
@@ -40,10 +23,13 @@ $(document).ready(function() {
     return vehicle[construction_attributes][start_date] > vehicle[construction_attributes][start_date]
 }, "* Enddate should be greater than Startdate");
 
-  $("#new_vehicle").validate({
+  $(".edit_vehicle").validate({
       onsubmit: true,
       errorClass: 'got_error',
       rules: {
+        "vehicle[occupants]":{
+          required:true
+        },
         "vehicle[construction_attributes][start_date]":{
           required:true
         },
@@ -53,6 +39,9 @@ $(document).ready(function() {
         }
       },
       messages: {
+        "vehicle[occupants]":{
+          required: "Occupants cannot be blank"
+        },
         "vehicle[construction_attributes][start_date]":{
           required: "Required",
         },
@@ -67,6 +56,29 @@ $(document).ready(function() {
     $( "#start_date" ).datepicker({ minDate: 0, maxDate: "+1M +10D",dateFormat: 'D, dd M yy' });
     $( "#delivery_date" ).datepicker({ minDate: 0, maxDate: "+1M +10D",dateFormat: 'D, dd M yy' });
   });
+
+  
+    // Hiding and showing attributes for vehicles
+    if ($("#vehicle_vehicle_type").val() == 'Shuttle'){
+      $("#payload_weight").hide();
+      $("#occupants").show();
+    }
+    else if ($("#vehicle_vehicle_type").val() == 'Satellite'){ 
+      $("#payload_weight").show();
+      $("#occupants").hide();
+    }
+
+    $( "#vehicle_vehicle_type" ).change(function() {
+      if ($("#vehicle_vehicle_type").val() == 'Shuttle'){
+        $("#payload_weight").hide();
+        $("#occupants").show();
+      }
+      else if ($("#vehicle_vehicle_type").val() == 'Satellite'){
+        
+        $("#payload_weight").show();
+        $("#occupants").hide();
+      }
+   });
 });
 
 
