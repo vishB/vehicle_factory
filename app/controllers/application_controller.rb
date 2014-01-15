@@ -14,8 +14,7 @@ class ApplicationController < ActionController::Base
     @vehicle_types = vehicle_types.collect { |x| x.kind }  
 
     # Collecting Engine Information
-    engines = Engine.all
-    @engines = engines.collect { |x| x.model }
+    @engines = Engine.all
 
     # Collecting Vehicle Information
     vehicles = Vehicle.all
