@@ -30,6 +30,7 @@ class VehicleTypesController < ApplicationController
   def new
     @vehicle_type = VehicleType.new
     add_breadcrumb "Vehicle types", :vehicle_types_path
+    add_breadcrumb "New", :vehicle_types_path
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @vehicle_type }
@@ -40,6 +41,7 @@ class VehicleTypesController < ApplicationController
   def edit
     @vehicle_type = VehicleType.find(params[:id])
     add_breadcrumb "Vehicle types", :vehicle_types_path
+    add_breadcrumb "#{@vehicle_type.kind}", :vehicle_types_path
   end
 
   # POST /vehicle_types

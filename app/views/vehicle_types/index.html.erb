@@ -15,7 +15,7 @@
     <%= link_to 'New Vehicle type', new_vehicle_type_path, :class=>"pull-left btn btn-success btn-lg", :role => "button" %>  <%= link_to 'Back', root_path,:class=>"pull-right btn btn-primary btn-lg", :role => "button" %><br/><br/>
     <div class="well well-large">
       <%= render_breadcrumbs %>
-      <div class="well well-large alert alert-info">
+      <div class="well well-small alert alert-info form-small">
       <!-- Table -->
       <table class="table table-bordered table-condensed table-striped">
         <tr>
@@ -28,7 +28,7 @@
           <tr>
             <td><%= link_to "#{vehicle_type.kind}", vehicle_type %></td>
             <td><%= link_to (image_tag("edit.ico",:width=>"14px",:height=>"14px")), edit_vehicle_type_path(vehicle_type) %></td>
-            <td><%#= link_to (image_tag("destroy.ico",:width=>"14px",:height=>"14px")), vehicle_type, method: :delete, data: { confirm: 'Are you sure?' },:remote => true, :class => "delete_vehicle_type" %></td>
+            <td><%= link_to (image_tag("destroy.ico",:width=>"14px",:height=>"14px")), vehicle_type, method: :delete, data: { confirm: 'Are you sure?' },:remote => true, :class => "delete_vehicle_type" %></td>
           </tr>
         <% end %>
       </table>
