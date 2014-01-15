@@ -49,6 +49,7 @@ class UsersController < ApplicationController
     add_breadcrumb "Users", :users_path
     add_breadcrumb "Edit user", :edit_user_path
     @user = User.find(params[:id])
+    @edit = true
   end
 
   # POST /users
