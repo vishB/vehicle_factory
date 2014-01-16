@@ -1,0 +1,37 @@
+<%= form_tag remove_vehicles_path do %>
+  <table class="table table-bordered table-condensed table-striped">
+    <tr>
+      <%#= render :partial => "vehicle_headers"%>
+      <th style="text-align:center;">Select</th>
+      <th>Vehicle</th>
+      <th>Occupants</th>
+      <th>Payload weight</th>
+      <th>Construction Start date</th>
+      <th>Construction Delivery date</th>
+    </tr>
+    <% @vehicles.each do |vehicle| %>  
+      <tr>
+        <% unless current_user.admin?%>
+          <% if @user_vehicles.include?vehicle.id %>
+            <td style="text-align:center;"><%= check_box_tag("check#{vehicle.id}", value = "#{vehicle.id}", checked = false )%></td>  
+            <td><%= link_to "#{vehicle.vehicle_type}-#{vehicle.v_identifier}", vehicle %></td>
+            <% if vehicle.vehicle_type == "Shuttle"%>
+            <td><%= vehicle.occupants %></td>
+            <% else%>
+            <td>NA</td>
+            <% end %>
+            <% if vehicle.vehicle_type == "Satellite"%>
+            <td><%= vehicle.payload_weight %></td>
+            <% else%>
+            <td>NA</td>
+            <% end %>
+          <td><%= vehicle.construction.start_date.to_date %></td>
+          <td><%= vehicle.construction.delivery_date.to_date %></td>   
+          <%= hidden_field_tag 'user_id', current_user.id %>
+          <% end %>
+        <% end %>
+      </tr>
+    <% end %>
+  </table>
+  <%= submit_tag "Deallocate",:class=>"btn btn-warning pull-right"%>
+<% end %>
