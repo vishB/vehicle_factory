@@ -33,7 +33,7 @@ Factory::Application.routes.draw do
       get 'engine_data'
     end
   end
-
+  
 
   # Allow admin to allocate vehicles to users
   match 'user_accesses/:id/allocate_users' => 'user_access#allocate_users', :as => :allocate_users
@@ -49,12 +49,6 @@ Factory::Application.routes.draw do
   # Allow users to share vehicles to users
   match 'user_accesses/:id/unshare_vehicles' => 'user_access#unshare_vehicles', :as => :unshare_vehicles
   
-  # # Allow users to share vehicles to users
-  # match 'user_accesses/:id/unshare_vehicle' => 'user_access#unshare_vehicle', :as => :unshare_vehicle
-  
-  # # Allow users to share vehicles to users
-  # match 'user_accesses/:id/share_vehicle' => 'user_access#share_vehicle', :as => :share_vehicle
-
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

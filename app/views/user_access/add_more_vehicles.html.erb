@@ -9,47 +9,15 @@
     </ul>
     <div class="tab-content">
       <div class="tab-pane active" id="tab1">
-        <h3>Available vehicles :</h3>
-          <%= form_tag more_vehicles_path do %>
-            <table class="table table-bordered table-condensed">
-              <tr>
-              <%= render :partial => "vehicle_headers"%>
-              </tr>
-              <% @vehicles.each do |vehicle| %>  
-                <tr>
-                  <% unless current_user.admin?%>
-                    <% unless @user_vehicles.include?vehicle.id %>
-                      <td style="text-align:center;"><%= check_box_tag("check#{vehicle.id}", value = "#{vehicle.id}", checked = false )%></td>  
-                      <%= render :partial => "vehicle_details", :locals => {vehicle:vehicle}%>
-                    <% end %>
-                  <% end %>
-                </tr>
-              <% end %>
-            </table>
-            <%= submit_tag "Add",:class=>"btn btn-warning pull-right"%>
-          <% end %>
+        <div id="user_vehicles" class="well well-large alert alert-info">
+          <h3>Available vehicles :</h3>
+          <%= render :partial => "vehicles_available"%>
+        </div>
       </div>
       <div class="tab-pane" id="tab2">
-        <div id="user_vehicles">
+        <div id="user_vehicles" class="well well-large alert alert-info">
           <h3>Added vehicles :</h3>
-          <%= form_tag remove_vehicles_path do %>
-            <table class="table table-bordered table-condensed">
-              <tr>
-                <%= render :partial => "vehicle_headers"%>
-              </tr>
-              <% @vehicles.each do |vehicle| %>  
-                <tr>
-                  <% unless current_user.admin?%>
-                    <% if @user_vehicles.include?vehicle.id %>
-                      <td style="text-align:center;"><%= check_box_tag("check#{vehicle.id}", value = "#{vehicle.id}", checked = false )%></td>  
-                      <%= render :partial => "vehicle_details", :locals => {vehicle:vehicle}%>
-                    <% end %>
-                  <% end %>
-                </tr>
-              <% end %>
-            </table>
-            <%= submit_tag "Deallocate",:class=>"btn btn-warning pull-right"%>
-          <% end %>
+            <%= render :partial => "added_vehicles"%>
         </div>
       </div>
     </div>
