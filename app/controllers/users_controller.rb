@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
 	before_filter :authenticate_user!, :except => [:new,:create]
-  before_filter :check_admin, :only => [:index,:check_admin,:destroy]
+  before_filter :check_admin, :only => [:index,:change_admin,:destroy]
   
   # GET /users
   # GET /users.json
@@ -105,12 +105,6 @@ class UsersController < ApplicationController
     end
   end
   
-  # Admin settings
-  def admin_settings
-    add_breadcrumb "Admin settings", :admin_settings_users_path
-    @users = User.all
-  end
-  
   # Transfer admin privileges to another user
   def change_admin
     if params[:old_admin] && params[:user_id]
@@ -130,11 +124,5 @@ class UsersController < ApplicationController
         redirect_to users_path
       end   
     end
-  end
-
-  def check_admin
-    unless current_user.admin?
-      redirect_to root_path
-    end  
   end
 end

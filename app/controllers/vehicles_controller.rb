@@ -1,6 +1,7 @@
 class VehiclesController < ApplicationController
   before_filter :authenticate_user!
   before_filter :check_dates, :only => [:create]
+  before_filter :check_admin, :only => [:new,:create]
 
   # GET /vehicles
   # GET /vehicles.json

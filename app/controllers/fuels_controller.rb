@@ -1,5 +1,6 @@
 class FuelsController < ApplicationController
   before_filter :authenticate_user!
+  before_filter :check_admin
   # GET /fuels
   # GET /fuels.json
   def index

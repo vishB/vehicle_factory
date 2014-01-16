@@ -1,5 +1,6 @@
 class EnginesController < ApplicationController
   before_filter :authenticate_user!
+  before_filter :check_admin
   # GET /engines
   # GET /engines.json
   def index

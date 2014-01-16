@@ -1,5 +1,6 @@
 class VehicleTypesController < ApplicationController
   before_filter :authenticate_user!
+  before_filter :check_admin
   # GET /vehicle_types
   # GET /vehicle_types.json
   def index
