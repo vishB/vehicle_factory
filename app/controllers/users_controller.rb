@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
 	before_filter :authenticate_user!, :except => [:new,:create]
+  before_filter :check_admin, :only => [:index,:check_admin,:destroy]
   
   # GET /users
   # GET /users.json
@@ -129,5 +130,11 @@ class UsersController < ApplicationController
         redirect_to users_path
       end   
     end
+  end
+
+  def check_admin
+    unless current_user.admin?
+      redirect_to root_path
+    end  
   end
 end
