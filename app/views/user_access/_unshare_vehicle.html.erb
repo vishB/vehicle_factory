@@ -1,0 +1,35 @@
+<%= form_tag unshare_vehicles_path do %>
+	<%=hidden_field_tag 'vehicle_id', @vehicle.first.id %>
+	<%=hidden_field_tag 'shared_by', current_user.id%>
+
+  <div class="well well-small alert alert-info">
+    <table class="table table-condensed table-bordered table-striped">
+      <tr>
+        <th>User</th>
+        <th>Email</th>
+        <th>Age</th>
+        <th>Gender</th>
+        <th>Select</th>
+      </tr>
+
+      <% @users.each do |user| %>  
+        <tr>
+          <% if !user.admin? && user.id != current_user.id%>
+            <% if @vehicle_users.include?user%>
+              <td><%= "#{user.user_detail.first_name } #{user.user_detail.last_name}"%>
+              </td>
+              <td><%= user.email%></td>
+              <td><%= user.user_detail.age %></td>
+              <td><%= user.user_detail.sex %></td>
+              <td><%=check_box_tag("check#{user.id}", value = "#{user.id}", 
+                checked = false,options = {})%>
+              </td>
+            <% end %>  
+          <% end %>
+        </tr>
+      <% end %>
+    </table>
+  </div>
+  <%= submit_tag "Unshare",:class => "pull-right btn btn-warning", 
+  :role =>"button"%>      
+<% end %>
