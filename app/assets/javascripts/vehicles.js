@@ -1,5 +1,4 @@
 $(window).load(function(){
-
   //AJAX call for getting engine power and payload on page load.
    $.ajax({
         type: "GET",
@@ -11,10 +10,9 @@ $(window).load(function(){
 
   // AJAX call for getting engine power and payload.
   $("#vehicle_engine_id").change(function() {
-  $.ajax({ url: "engine_data", context: document.body,data: {engine_model : $(this).val()}, success: function(){
-  }});
-});
-
+    $.ajax({ url: "engine_data", context: document.body,data: {engine_model : $(this).val()}, success: function(){
+    }});
+  });
 });
 
 $(document).ready(function() {
