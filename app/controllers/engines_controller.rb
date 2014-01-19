@@ -1,6 +1,6 @@
 class EnginesController < ApplicationController
   before_filter :authenticate_user!
-  before_filter :check_admin
+  before_filter :check_admin, :except => [:show]
   # GET /engines
   # GET /engines.json
   def index
@@ -38,9 +38,7 @@ class EnginesController < ApplicationController
   def new
     add_breadcrumb "Engines", :engines_path
     @engine = Engine.new
-    fuel = Fuel.all
-    @fuel_type = fuel.collect { |x| x.fuel_type }    
-    
+    @fuel_types = Fuel.all  
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @engine }
@@ -52,15 +50,12 @@ class EnginesController < ApplicationController
     @engine = Engine.find(params[:id])
     add_breadcrumb "Engines", :engines_path
     add_breadcrumb "#{@engine.model}", :engines_path
-    fuel = Fuel.all
-    @fuel_type = fuel.collect { |x| x.fuel_type } 
+    @fuel_types = Fuel.all 
   end
 
   # POST /engines
   # POST /engines.json
   def create
-    fuel = Fuel.where("fuel_type = ?", params[:engine][:fuel_id])
-    params[:engine][:fuel_id] = fuel.first.id
     @engine = Engine.new(params[:engine])
 
     respond_to do |format|
