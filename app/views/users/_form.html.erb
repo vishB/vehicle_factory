@@ -1,8 +1,4 @@
-<% if @edit%>
-          <span><%= image_tag('change_pwd.png',:class=>"click pull-right",:title=>"Change account password")%></span>
-        <% end %> 
-
-<div class="well well-lg form-horizontal alert alert-info user-form row-fluid">
+<div class="well well-large form-horizontal alert alert-info user-form row-fluid">
   <%= form_for(@user) do |f| %>
     <% if @user.errors.any? %>
       <div id="error_explanation">
@@ -26,13 +22,8 @@
         <%= f.hidden_field :created_by, :value => 0.to_i %>          
       <% end %>        
     </div>
-    <div>
    
-    <% if @edit %>
-      <div class="control-group " id="pwd">
-    <% else %>
-      <div class="control-group">
-    <% end %>
+    <div class="control-group well well-small alert alert-error">
       <%= f.label :password, :class => "control-label row-fluid", :style=>"text-align:left;" %>
       <div class="controls">
         <%= f.password_field :password, :class => "input-xlarge row-fluid" %>
@@ -44,46 +35,7 @@
       </div>  
     </div>
 
-    <%= f.fields_for :user_detail do |detail| %>
-      <div class="control-group">
-        <%= detail.label :first_name, :class => "control-label row-fluid", :style=>"text-align:left;" %>
-        <div class="controls">
-          <%= detail.text_field :first_name, :class => "input-xlarge row-fluid", :maxlength => 30 %>
-        </div>  
-      </div>
-
-      <div class="control-group">
-        <%= detail.label :last_name, :class => "control-label row-fluid", :style=>"text-align:left;" %>
-        <div class="controls">
-          <%= detail.text_field :last_name, :class => "input-xlarge row-fluid", :maxlength => 30 %>
-        </div>  
-      </div>
-
-      <div class="control-group">
-        <%= detail.label :age, :class => "control-label row-fluid", :style=>"text-align:left;" %>
-        <div class="controls">
-          <%= detail.text_field :age, :class => "input-xlarge numeric_only row-fluid", :maxlength => 3 %>
-        </div>
-      </div>
-
-      <div class="control-group">
-        <%= detail.label :Gender, :class => "control-label row-fluid", :style=>"text-align:left;" %>
-        <div class="controls">
-        <%= detail.select :sex, options_for_select(["Male", "Female"]), :class => "input-xlarge row-fluid"%>
-        </div>
-      </div>
-
-      <div class="control-group">
-        <%= detail.label :phone, :class => "control-label row-fluid", :style=>"text-align:left;" %>
-        <div class="controls">
-          <%= detail.text_field :phone, :class => "input-xlarge numeric_only row-fluid", :maxlength => 10 %>
-        </div>  
-      </div>
-
-      <div class="actions">
-        <%= f.submit(:class => "btn btn-primary pull-right row-fluid") %>
-      </div>
-    <%end%>
+    <%= render :partial => "user_details", :locals => {:f => f}%>
   <% end %>
 </div>  
 
