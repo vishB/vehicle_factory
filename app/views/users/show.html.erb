@@ -4,7 +4,10 @@
 <% if user_signed_in? %>
   <div class="well well-large">
     <%= render_breadcrumbs %>
-    <div class="well well-lg">
+    <div class="well well-large alert alert-info">
+      <% if current_user == @user%>
+        <%= link_to "Edit profile", edit_user_path, :class => "pull-right"%>
+      <% end %>
       <div>
         <h3><%= @user.user_detail.first_name %>&nbsp;<%= @user.user_detail.last_name %></h3>
         <p>
@@ -36,10 +39,12 @@
     
     <div id="user_vehicles">
       <% if @vehicles%>
+      <div class="well well-large alert alert-success">
         <%= render :partial => 'vehicles/vehicles_list'%>
+      </div>  
       <% end %>
     </div>
   </div>
 <% else%>  
-  <%= link_to 'Back', root_path, :class=>"pull-right btn btn-primary btn-lg", :role => "button"%>
+  <%= link_to 'Back', root_path, :class=>"pull-right btn btn-primary", :role => "button"%>
 <% end %><br/><br/>     
