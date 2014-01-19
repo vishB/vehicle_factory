@@ -1,6 +1,6 @@
 class UserAccessController < ApplicationController
   before_filter :authenticate_user!
-  before_filter :check_admin, :except => [:add_more_vehicles,:remove_vehicles]
+  before_filter :check_admin, :only => [:allocate_users,:remove_vehicles]
 
   # Admin can allocate vehicles to users.
 	def allocate_users
