@@ -37,6 +37,13 @@ end
 describe Vehicle do
   it "should have number of occupants a numeric value" do
     vehicle = FactoryGirl.build(:vehicle, occupants: "occupants")
-    vehicle.should_not be_valid
+    vehicle.occupants.should eq(0)
+  end
+end
+
+describe Vehicle do
+  it "Should have an engine" do
+    vehicle = FactoryGirl.build(:vehicle)
+    vehicle.should be_valid
   end
 end  
