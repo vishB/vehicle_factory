@@ -10,7 +10,7 @@ class Vehicle < ActiveRecord::Base
   validates :v_identifier, :uniqueness => true
   validates_length_of :v_identifier, :maximum => 4, :allow_blank => false
 
-
+  # Create vehicle identifier
   def self.get_identifier
     last_identifier = self.last
     if last_identifier.blank?
@@ -18,5 +18,13 @@ class Vehicle < ActiveRecord::Base
     else
       identifier = self.maximum("v_identifier") + 1
     end
+  end
+  # Get vehicle sharer
+  def self.get_sharer(vehicle)
+     user = UserAccess.find_by_vehicle_id(vehicle).shared_by
+     f_name = UserDetail.find(user).first_name
+     l_name = UserDetail.find(user).last_name
+
+     sharer = f_name + " " + l_name
   end
 end
