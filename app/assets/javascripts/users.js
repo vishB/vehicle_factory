@@ -8,4 +8,19 @@ $(document).ready(function(){
 	$(".click").click(function(){
 		$("#pwd").slideToggle();
 	});
+
+	$("#user_vehicles").hide();
+	$(".up").hide();
+	$(".up").click(function(){
+		$("#user_vehicles").slideUp();
+		$(".up").hide();
+		$(".down").show();
+  });
+
+	$(".down").click(function(){
+		$("#user_vehicles").slideDown();
+		$(".down").hide();
+		$(".up").show();
+	});
 });
+
