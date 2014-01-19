@@ -104,16 +104,11 @@ class VehiclesController < ApplicationController
 
     #Delete vehicle only if its delivery date has not passed yet
     respond_to do |format|
-      #if @vehicle.construction.delivery_date < Time.now.to_date
-        if @vehicle.destroy
-          format.html { redirect_to vehicles_url }
-          format.json { head :no_content }
-          format.js { render :layout => false }
-        end 
-      #else
-      #   flash[:error] = "Sorry! Vehicle cannot be deleted as delivery date has not passed yet."
-      #   format.html { render action: "index" }  
-      # end
+      if @vehicle.destroy
+        format.html { redirect_to vehicles_url }
+        format.json { head :no_content }
+        format.js { render :layout => false }
+      end 
     end  
   end
   
@@ -131,7 +126,7 @@ class VehiclesController < ApplicationController
         :users => @users
       }
       
-    #Second information url shows identifier,engine information and vehicle delivery date
+    # Second information url shows identifier,engine information and vehicle delivery date
     elsif params[:info] == "second_url"
       @vehicle = Vehicle.find(params[:id])
       @identifier = @vehicle.v_identifier
@@ -145,6 +140,7 @@ class VehiclesController < ApplicationController
     end
   end
 
+  # Find power of an engine selected
   def engine_data 
     if params[:engine_model]
       @power = Engine.where(:id => params[:engine_model]).first.power_rating
@@ -153,7 +149,8 @@ class VehiclesController < ApplicationController
       end
     end
   end
-
+  
+  # Validate delivery date and start date 
   def check_dates
     if params[:vehicle][:construction_attributes]
       start_date = params[:vehicle][:construction_attributes].values.first
