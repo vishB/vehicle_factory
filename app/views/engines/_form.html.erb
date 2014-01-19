@@ -11,18 +11,18 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :power_rating %><br />
-    <%= f.select :power_rating, 0..90 %>
+  <div >
+    <%= f.label :power_rating %>
+    <%= f.select :power_rating, 1..90 %>
   </div>
-  <div class="field">
+  <div >
     <%= f.hidden_field :model, :value => "ENG-M-#{Time.now.strftime("%G-W%V%u-T%H%M%S")}" %>
   </div>
-  <div class="field">
-    <%= f.label :fuel_type %><br />
-    <%= f.select :fuel_id, @fuel_type %>
+  <div >
+    <%= f.label :fuel_type %>
+    <%= f.collection_select :fuel_id, @fuel_types, :id, :fuel_type %>
   </div>
-  <div class="actions">
-    <%= f.submit %>
+  <div class="submit-margin">
+    <%= f.submit(:class => "btn btn-primary row-fluid") %>
   </div>
 <% end %>
