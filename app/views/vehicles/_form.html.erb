@@ -1,4 +1,4 @@
-<div class="well well-large alert-info">
+<div class="well well-large form-horizontal alert alert-info user-form row-fluid">
   <%= form_for(@vehicle) do |f| %>
     <% if @vehicle.errors.any? %>
       <div id="error_explanation">
@@ -12,41 +12,63 @@
       </div>
     <% end %>
 
-    <div>
-      <%= f.label :vehicle_type %>
-      <%= f.select :vehicle_type, @vehicle_types %>
+    <div class="control-group">
+      <%= f.label :vehicle_type, :class => "control-label row-fluid", :style=>"text-align:left;" %>
+      <div class="controls">
+        <%= f.select :vehicle_type, @vehicle_types, :class => "input-xlarge row-fluid", :autofocus => true %>
+      </div>
+     </div>
+      
+    <div class="control-group">
+      <%= f.label :vehicle_engine, :class => "control-label row-fluid", :style=>"text-align:left;" %>
+      <div class="controls">
+        <%= f.collection_select :engine_id, @engines, :id, :model, :class => "input-xlarge row-fluid", :autofocus => true %>
+      </div>
     </div>
-    <div>
-      <%= f.label :vehicle_engine %>
-      <%= f.collection_select :engine_id, @engines, :id, :model %>
+
+    <div class="control-group">
+      <%= label_tag 'name', 'Power',:class => "control-label row-fluid", :style=>"text-align:left;"%>
+      <div class="controls">   
+        <%= text_field_tag :power, nil, :disabled => true, :class => "input-xlarge row-fluid", :autofocus => true %>
+      </div>
     </div>
-    <div>
-      <%= label_tag 'name', 'Power'%>
-      <%= text_field_tag :power, nil, :disabled => true %>
+
+    <div id="occupants" class="control-group">
+      <%= f.label :occupants, :class => "control-label row-fluid", :style=>"text-align:left;" %>
+      <div class="controls"> 
+        <%= f.number_field :occupants, :class=>"numeric_only input-xlarge row-fluid" %><abbr title="required"> *</abbr>
+      </div>  
     </div>
-    <div id="occupants">
-      <%= f.label :occupants %>
-      <%= f.number_field :occupants, :class=>"numeric_only" %><abbr title="required"> *</abbr>
-    </div>
-    <div id="payload_weight">
-      <%= f.label :payload_weight_in_kgs %>
-      <%= f.text_field :payload_weight, :readonly => true %>
+
+    <div id="payload_weight" class="control-group">
+      <%= f.label :payload_weight_in_kgs, :class => "control-label row-fluid", :style=>"text-align:left;" %>
+      <div class="controls">
+        <%= f.text_field :payload_weight, :readonly => true, :class => "input-xlarge row-fluid" %>
+      </div>  
       <%= f.hidden_field :v_identifier %>
     </div>
+
     <%= f.fields_for :construction do |ff| %>
-      <div>
-        <%= ff.label :start_date %>
-        <%= ff.text_field :start_date, :id=> "start_date", :placeholder => "Start date" %>
-        <abbr title="required"> *</abbr>
+      <div class="control-group">
+        <%= ff.label :start_date, :class => "control-label row-fluid", :style=>"text-align:left;" %>
+        <div class="controls">  
+          <%= ff.text_field :start_date, :id=> "start_date", :placeholder => "Start date", 
+          :class => "input-xlarge row-fluid" %>
+          <abbr title="required"> *</abbr>
+        </div>
       </div>
-      <div>
-        <%= ff.label :delivery_date %>
-        <%= ff.text_field :delivery_date, :id=> "delivery_date", :placeholder => "End date" %>
-        <abbr title="required"> *</abbr>
-      </div>  
+
+      <div class="control-group">
+        <%= ff.label :delivery_date, :class => "control-label row-fluid", :style=>"text-align:left;" %>
+        <div class="controls">
+          <%= ff.text_field :delivery_date, :id=> "delivery_date", :placeholder => "End date",
+          :class => "input-xlarge row-fluid" %>
+          <abbr title="required"> *</abbr>
+        </div>
+      </div>    
     <% end %>
     <div >
-      <%= f.submit %>
+      <%= f.submit(:class => "btn btn-primary pull-right row-fluid") %>
     </div>
   <% end %>
 </div>
