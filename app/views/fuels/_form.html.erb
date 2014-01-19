@@ -11,15 +11,11 @@
     </div>
   <% end %>
 
-  <!-- <div class="field">
-    <%= f.label :engine_id %><br />
-    <%= f.number_field :engine_id %>
-  </div> -->
   <div class="field">
-    <%= f.label :fuel_type %><br />
+    <%= f.label :fuel_type %>
     <%= f.text_field :fuel_type %>
   </div>
-  <div class="actions">
-    <%= f.submit %>
+  <div class="submit-margin">
+    <%= f.submit(:class => "btn btn-primary row-fluid") %>
   </div>
 <% end %>
