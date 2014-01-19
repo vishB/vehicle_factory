@@ -49,7 +49,7 @@ class UsersController < ApplicationController
   def edit
     add_breadcrumb "Users", :users_path
     add_breadcrumb "Edit user", :edit_user_path
-    @user = User.find(params[:id])
+    @user = User.find(params[:id]).user_detail
     @edit = true
   end
 
@@ -76,11 +76,6 @@ class UsersController < ApplicationController
   # PUT /users/1.json
   def update
     @user = User.find(params[:id])
-    if ( params[:user][:password] && params[:user][:password_confirmation] ).blank?
-      params[:user][:password] = @user.password
-      params[:user][:password_confirmation] = @user.password_confirmation
-    end
-
     respond_to do |format|
       if @user.update_attributes(params[:user])
         format.html { redirect_to @user, notice: 'user was successfully updated.' }
@@ -100,7 +95,7 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       format.html { redirect_to users_url }
-      format.json { head :no_content }
+      #format.json { head :no_content }
       format.js   { render :layout => false }
     end
   end
