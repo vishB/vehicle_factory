@@ -27,7 +27,8 @@ class ApplicationController < ActionController::Base
     all_users = User.all
     @available_users = all_users - vehicle_users
   end
-
+  
+  # Check if logged in user is admin
   def check_admin
     unless current_user.admin?
       redirect_to root_path

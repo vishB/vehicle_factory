@@ -1,0 +1,40 @@
+    <%= f.fields_for :user_detail do |detail| %>
+      <div class="control-group">
+        <%= detail.label :first_name, :class => "control-label row-fluid", :style=>"text-align:left;" %>
+        <div class="controls">
+          <%= detail.text_field :first_name, :class => "input-xlarge row-fluid", :maxlength => 30 %>
+        </div>  
+      </div>
+
+      <div class="control-group">
+        <%= detail.label :last_name, :class => "control-label row-fluid", :style=>"text-align:left;" %>
+        <div class="controls">
+          <%= detail.text_field :last_name, :class => "input-xlarge row-fluid", :maxlength => 30 %>
+        </div>  
+      </div>
+
+      <div class="control-group">
+        <%= detail.label :age, :class => "control-label row-fluid", :style=>"text-align:left;" %>
+        <div class="controls">
+          <%= detail.text_field :age, :class => "input-xlarge numeric_only row-fluid", :maxlength => 2 %>
+        </div>
+      </div>
+
+      <div class="control-group">
+        <%= detail.label :Gender, :class => "control-label row-fluid", :style=>"text-align:left;" %>
+        <div class="controls">
+        <%= detail.select :sex, options_for_select(["Male", "Female"]), :class => "input-xlarge row-fluid"%>
+        </div>
+      </div>
+
+      <div class="control-group">
+        <%= detail.label :phone, :class => "control-label row-fluid", :style=>"text-align:left;" %>
+        <div class="controls">
+          <%= detail.text_field :phone, :class => "input-xlarge numeric_only row-fluid", :maxlength => 10 %>
+        </div>  
+      </div>
+
+      <div class="submit-margin">
+        <%= f.submit(:class => "btn btn-primary pull-right row-fluid") %>
+      </div>
+    <%end%>
