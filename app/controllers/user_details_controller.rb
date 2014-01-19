@@ -61,7 +61,7 @@ class UserDetailsController < ApplicationController
 
     respond_to do |format|
       if @user_detail.update_attributes(params[:user_detail])
-        format.html { redirect_to @user_detail, notice: 'User detail was successfully updated.' }
+        format.html { redirect_to users_path, notice: 'User details successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
