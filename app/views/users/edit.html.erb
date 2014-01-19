@@ -6,7 +6,6 @@
       <%= link_to 'Back', root_path, :class=>"pull-right btn btn-primary btn-lg", :role => "button"%><br/><br/>  
     <% end %>
   
-<div class="well well-lg">
-	<%= render 'form' %>
-<div><br/>
+<div class="well well-large">
+	<%= render :partial => "change_user_details", :locals => {:user => @user}%>
 <% end %>     
