@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
   add_breadcrumb "Home", :root_path
 
   def back
+    #keep track of current and last url hit
     session[:url] = request.original_url
     session[:last_url] = request.referrer
   end
