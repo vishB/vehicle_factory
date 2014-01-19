@@ -84,20 +84,7 @@ $(document).ready(function() {
             }
         }
     });
-
-    $(".down").hide();
-    $(".up").click(function(){
-    $("#user_vehicles").slideUp();
-    $(".up").hide();
-    $(".down").show();
-  });
-
-  $(".down").click(function(){
-    $("#user_vehicles").slideDown();
-    $(".down").hide();
-    $(".up").show();
-  });
-  
+     
   $(".numeric_only").keydown(function(event) {
         // Allow: backspace, delete, tab, escape, enter and .
         if ( $.inArray(event.keyCode,[46,8,9,27,13,190]) !== -1 ||
@@ -114,6 +101,54 @@ $(document).ready(function() {
                 event.preventDefault(); 
             }   
         }
+    });
+});
+
+
+$(document).ready(function() {
+  return $(".edit_user_detail").validate({
+    onsubmit: true,
+    errorClass: "got_error",
+    rules: {
+      "user_detail[first_name]": {
+        required: true,
+        minlength: 2
+      },
+      "user_detail[last_name]": {
+        required: true,
+        minlength: 2
+      },
+      "user_detail[age]": {
+        number: true
+      },
+      "user_detail[phone]": {
+        number: true,
+        minlength: 10,
+        maxlength: 11
+      }
+    },
+    messages: {
+      "user_detail[first_name]": {
+        required: "First name is required"
+      },
+      "user_detail[last_name]": {
+        required: "Last name is required"
+      },
+      "user_detail[phone]": {
+        required: "Phone number must be decimal value"
+      }
+    }
+  });
+
+  $('.alphanumeric').keypress(function (e) {
+    var regex = new RegExp("^[a-zA-Z]+$");
+    var str = String.fromCharCode(!e.charCode ? e.which : e.charCode);
+    if (regex.test(str)) {
+        return true;
+    }
+
+    e.preventDefault();
+    return false;
     });
 });
 
