@@ -56,10 +56,12 @@
     </div> 
   </body>
 
-  <div class="footer" >
+  <nav class="navbar navbar-default navbar-fixed-bottom" role="navigation">
     <% if user_signed_in?%>
-      <p><%= link_to 'Add new users', new_user_path, :class => "btn btn-primary btn-lg", :role=>"button" %> or <%= link_to 'Login as another user',destroy_user_session_path, method: :delete, :class => "btn btn-primary btn-lg", :role=>"button" %></p> 
+      <div class="nav-footer">
+        <p><%= link_to 'Add new users', new_user_path, :class => "btn btn-primary btn-lg", :role=>"button" %> or <%= link_to 'Login as another user',destroy_user_session_path, method: :delete, :class => "btn btn-primary btn-lg", :role=>"button" %></p>
+      </div> 
     <% end %>
-  </div>
+  </nav>
 </html>
 
