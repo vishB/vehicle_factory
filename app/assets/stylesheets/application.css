@@ -40,8 +40,6 @@ body {
 
 .container h2 {color:#ffffff;}
 
-label.required:after{content:"*"}
-
 .got_error { color:red; }
 
 .form-cover{
@@ -124,4 +122,9 @@ label.required:after{content:"*"}
 
 .back-margin{
   margin-bottom:50px;
+}
+
+label.required:after {
+    content: "*";
+    color: red;
 }
