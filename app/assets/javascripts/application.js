@@ -104,7 +104,7 @@ $(document).ready(function() {
     });
 
   $('.alphaonly').bind('keyup blur',function(){ 
-    $(this).val( $(this).val().replace(/[^a-z]/g,'') ); }
+    $(this).val( $(this).val().replace(/[^a-zA-Z]/g,'') ); }
   );
 });
 
