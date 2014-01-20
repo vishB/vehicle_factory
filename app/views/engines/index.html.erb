@@ -21,11 +21,11 @@
               <td><%= engine.power_rating %></td>
               <td><%= engine.fuel.fuel_type %></td>
               <% if engine.vehicle.blank?%>
-                <td style="text-align:center;"><%= link_to (image_tag("edit.ico",:width=>"14px",:height=>"14px",:title => "Edit engine details")), edit_engine_path(engine) %></td>
-                <td style="text-align:center;"><%= link_to (image_tag("destroy.ico",:width=>"14px",:height=>"14px",:title => "Delete user")), engine, method: :delete, data: { confirm: 'Are you sure?' },:remote => true, :class => 'delete_engine' %></td>
+                <td style="text-align:center;"><%= link_to (image_tag("edit.png",:width=>"16px",:height=>"16px",:title => "Edit engine details")), edit_engine_path(engine) %></td>
+                <td style="text-align:center;"><%= link_to (image_tag("destroy.png",:width=>"16px",:height=>"16px",:title => "Delete user")), engine, method: :delete, data: { confirm: 'Are you sure?' },:remote => true, :class => 'delete_engine' %></td>
               <% else %>
-                <td style="text-align:center;"><%= link_to (image_tag("stop.ico", :width=>"16px",:height=>"16px",:title=>"Can't edit, engine in use")) %></td>
-                <td style="text-align:center;"><%= link_to (image_tag("stop.ico", :width=>"16px",:height=>"16px",:title=>"Can't delete, engine in use")) %></td>
+                <td style="text-align:center;"><%= image_tag("c_edit.png", :width=>"16px",:height=>"16px",:title=>"Can't edit, engine in use") %></td>
+                <td style="text-align:center;"><%= link_to (image_tag("c_delete.png", :width=>"16px",:height=>"16px",:title=>"Can't delete, engine in use")) %></td>
               <% end %>
             </tr>
           <% end %>

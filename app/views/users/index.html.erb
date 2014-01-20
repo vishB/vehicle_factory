@@ -40,14 +40,14 @@
             <td><%= user.email %></td>
             <td><%= User.creator(user) %></td>
             <% if current_user.admin? %>  
-              <td><%= link_to (image_tag("edit.ico",:width=>"14px",:height=>"14px", :title => "Edit user details")), edit_user_path(user) %></td>
+              <td><%= link_to (image_tag("edit.png",:width=>"16px",:height=>"16px", :title => "Edit user details")), edit_user_path(user) %></td>
               <% unless user.admin?%>
                 <td>
-                <%= link_to (image_tag("destroy.ico",:width=>"14px",:height=>"14px",:title => "Delete user")), user, method: :delete, data: 
+                <%= link_to (image_tag("destroy.png",:width=>"16px",:height=>"16px",:title => "Delete user")), user, method: :delete, data: 
                   { confirm: "Are you sure you want to remove user #{user.user_detail.first_name} #{user.user_detail.last_name} from the system ?" }, :remote => true, :class => 'delete_user' %>
                 </td>
               <% else %>
-                <td><%= image_tag("stop.ico", :width=>"16px",:height=>"16px",:id => "stop", :title => "Admin can't be deleted")
+                <td><%= image_tag("c_delete.png", :width=>"16px",:height=>"16px",:id => "stop", :title => "Admin can't be deleted")
               %></td>  
               <% end %>
             <% end %>

@@ -35,12 +35,12 @@
           <%else%>
             <td>--Unshared--</td>
           <% end %>  
-          <td><%= link_to (image_tag("edit.ico",:width=>"14px",:height=>"14px",:title => "Edit Vehicle Details")), edit_vehicle_path(vehicle) %></td>
+          <td><%= link_to (image_tag("edit.png",:width=>"16px",:height=>"16px",:title => "Edit Vehicle Details")), edit_vehicle_path(vehicle) %></td>
           <% if vehicle.construction.delivery_date.to_date > Time.now.to_date %>
-            <td><%= image_tag("stop.ico", :width=>"16px",:height=>"16px",:id => "stop", :title => "Vehicle still under construction")
+            <td><%= image_tag("c_delete.png", :width=>"16px",:height=>"16px",:id => "stop", :title => "Vehicle still under construction")
             %></td>
           <% else %>  
-            <td><%= link_to (image_tag("destroy.ico",:width=>"14px",:height=>"14px",:title => "Delete Vehicle")), vehicle, :method => :delete, data: 
+            <td><%= link_to (image_tag("destroy.png",:width=>"16px",:height=>"16px",:title => "Delete Vehicle")), vehicle, :method => :delete, data: 
               { confirm: "Are you sure you want to remove #{vehicle.vehicle_type}-#{vehicle.v_identifier} from you vehicles list ?" }, :remote => true, :class => 'delete_vehicle' %></td>
            <% end %>   
           <% if current_user.admin? %>
