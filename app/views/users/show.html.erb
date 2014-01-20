@@ -5,34 +5,33 @@
   <div class="well well-large">
     <%= render_breadcrumbs %>
     <div class="well well-large alert alert-info">
+      <h3><%= @user.user_detail.first_name %>&nbsp;<%= @user.user_detail.last_name %></h3>
+      <p>
+        <b>Age:</b>
+        <%= @user.user_detail.age %>
+      </p>
+
+      <p>
+        <b>Sex:</b>
+        <%= @user.user_detail.sex %>
+      </p>
+
+      <p>
+        <b>Phone:</b>
+        <%= @user.user_detail.phone %>
+      </p>
+
+      <p>
+        <b>Email:</b>
+        <%= @user.email %>
+      </p>
       <% if current_user == @user%>
-        <%= link_to "Edit profile", edit_user_path, :class => "pull-right"%>
+        <%= link_to "Edit profile", edit_user_path, :class => "pull-left btn btn-warning btn-small "%>
       <% end %>
-      <div>
-        <h3><%= @user.user_detail.first_name %>&nbsp;<%= @user.user_detail.last_name %></h3>
-        <p>
-          <b>Age:</b>
-          <%= @user.user_detail.age %>
-        </p>
-
-        <p>
-          <b>Sex:</b>
-          <%= @user.user_detail.sex %>
-        </p>
-
-        <p>
-          <b>Phone:</b>
-          <%= @user.user_detail.phone %>
-        </p>
-
-        <p>
-          <b>Email:</b>
-          <%= @user.email %>
-        </p>
-      </div>
     </div>
 
     <div>
+      Vehicles
       <%= image_tag 'up.png', :class=>"up",:title=>"hide vehicles"%>
       <%= image_tag 'down.png', :class=>"down",:title=>"show vehicles"%>
     </div><br/>  
