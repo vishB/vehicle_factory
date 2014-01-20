@@ -1,6 +1,6 @@
 class VehiclesController < ApplicationController
   before_filter :authenticate_user!
-  before_filter :check_dates, :only => [:create]
+  before_filter :check_dates, :only => [:create,:update]
   before_filter :check_admin, :only => [:new,:create]
 
   # GET /vehicles
@@ -153,13 +153,14 @@ class VehiclesController < ApplicationController
   # Validate delivery date and start date 
   def check_dates
     if params[:vehicle][:construction_attributes]
-      start_date = params[:vehicle][:construction_attributes].values.first
-      delivery_date = params[:vehicle][:construction_attributes].values.last
-     
+
+      start_date = params[:vehicle][:construction_attributes]['start_date']
+      delivery_date = params[:vehicle][:construction_attributes]['delivery_date']
+      
       if start_date.to_date > delivery_date.to_date
         respond_to do |format|
           flash[:error] = "Error! Delivery date less than start date."
-          format.html { redirect_to new_vehicle_path }
+          format.html { redirect_to back }
           format.json { head :no_content }
         end
       end

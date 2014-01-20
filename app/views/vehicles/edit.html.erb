@@ -2,11 +2,7 @@
 <div class="container">
   <% if user_signed_in? %>
     <!-- Notifications  -->
-    <% if flash[:error] %>
-      <div class="alert alert-success" id="test">
-        <%=flash[:notice]%>
-      </div>
-    <% elsif notice %> 
+    <% if flash[:notice] %>
        <div class="alert alert-success" id="test">
         <%= notice%>
       </div>
