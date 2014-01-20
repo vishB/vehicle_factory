@@ -17,10 +17,6 @@ $(window).load(function(){
 
 $(document).ready(function() {
 
-  $.validator.addMethod("endate_greater_startdate", function(value, element) {
-    return vehicle[construction_attributes][start_date] > vehicle[construction_attributes][start_date]
-}, "* Enddate should be greater than Startdate");
-
   $(".edit_vehicle").validate({
       onsubmit: true,
       errorClass: 'got_error',
@@ -33,7 +29,6 @@ $(document).ready(function() {
         },
         "vehicle[construction_attributes][delivery_date]":{
           required:true,
-          endate_greater_startdate:true
         }
       },
       messages: {
@@ -41,10 +36,38 @@ $(document).ready(function() {
           required: "Occupants cannot be blank"
         },
         "vehicle[construction_attributes][start_date]":{
-          required: "Required",
+          required: "Start date is required",
         },
         "vehicle[construction_attributes][delivery_date]":{
-          required: "Required",
+          required: "End date is required",
+          endate_greater_startdate: "Delivery date cannot be in past."
+        }
+      },  
+  });
+
+  $(".new_vehicle").validate({
+      onsubmit: true,
+      errorClass: 'got_error',
+      rules: {
+        "vehicle[occupants]":{
+          required:true
+        },
+        "vehicle[construction_attributes][start_date]":{
+          required:true
+        },
+        "vehicle[construction_attributes][delivery_date]":{
+          required:true,
+        }
+      },
+      messages: {
+        "vehicle[occupants]":{
+          required: "Occupants cannot be blank"
+        },
+        "vehicle[construction_attributes][start_date]":{
+          required: "Start date is required",
+        },
+        "vehicle[construction_attributes][delivery_date]":{
+          required: "End date is required",
           endate_greater_startdate: "Delivery date cannot be in past."
         }
       },  
