@@ -24,7 +24,7 @@
       <%= @engine.model %>
     </p>
   </div>
-  <% if current_user.admin?%>
+  <% if current_user.admin? && @engine.vehicle.blank?%>
     <%= link_to 'Edit', edit_engine_path(@engine),:class=>"pull-right btn btn-warning btn-lg", :role => "button" %><br/>
   <% end %>  
 </div>
