@@ -16,12 +16,17 @@ class User < ActiveRecord::Base
 
   #find the user creator
   def self.creator(user)
-    unless user.created_by.blank? || user.created_by == 0.to_i
-      f_name = User.find(user.created_by).user_detail.first_name 
-      l_name = User.find(user.created_by).user_detail.last_name 
-      name = f_name + ' ' + l_name
+    #check if creator exists
+    if User.exists?(user.created_by)
+      unless user.created_by.blank? || user.created_by == 0.to_i
+        f_name = User.find(user.created_by).user_detail.first_name 
+        l_name = User.find(user.created_by).user_detail.last_name 
+        name = f_name + ' ' + l_name
+      else
+        name = "Annonymous user"
+      end
     else
       name = "Annonymous user"
-    end  
+    end    
   end
 end
