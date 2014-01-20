@@ -58,7 +58,7 @@
   <div>
     <% if user_signed_in?%>
       <div class="nav-footer">
-        <p><%= link_to 'Add new users', new_user_path, :class => "btn btn-primary btn-lg", :role=>"button" %> or <button class="btn btn-primary btn-lg" data-toggle="modal"   data-target="#myModal">Login as another user</button>
+        <p><%= link_to 'Add new users', new_user_path, :class => "btn btn-primary btn-lg", :role=>"button" %> or <button class="btn btn-primary btn-lg" data-toggle="modal"   data-target="#anotherUser">Login as another user</button>
         </p>
       </div> 
     <% end %>
@@ -67,7 +67,7 @@
 
 <!-- Button trigger modal -->
 <!-- Modal -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="anotherUser" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
