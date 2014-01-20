@@ -58,9 +58,34 @@
   <div>
     <% if user_signed_in?%>
       <div class="nav-footer">
-        <p><%= link_to 'Add new users', new_user_path, :class => "btn btn-primary btn-lg", :role=>"button" %> or <%= link_to 'Login as another user',destroy_user_session_path, method: :delete, :class => "btn btn-primary btn-lg", :role=>"button" %></p>
+        <p><%= link_to 'Add new users', new_user_path, :class => "btn btn-primary btn-lg", :role=>"button" %> or <button class="btn btn-primary btn-lg" data-toggle="modal"   data-target="#anotherUser">Login as another user</button>
+        </p>
       </div> 
     <% end %>
   </div>
 </html>
+
+<!-- Button trigger modal -->
+<!-- Modal -->
+<div class="modal fade" id="anotherUser" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">Login as another user</h4>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure you want to login as another user?</p>
+        Press 'Yes' to continue or 'No' to cancel.
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">No</button>
+        <%= link_to 'Yes',destroy_user_session_path, method: :delete, :class => "btn btn-primary", :role=>"button" %>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+
+
 
