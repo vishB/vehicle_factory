@@ -21,10 +21,11 @@ class Vehicle < ActiveRecord::Base
   end
   # Get vehicle sharer
   def self.get_sharer(vehicle)
+    if UserAccess.find_by_vehicle_id(vehicle)
      user = UserAccess.find_by_vehicle_id(vehicle).shared_by
      f_name = UserDetail.find(user).first_name
      l_name = UserDetail.find(user).last_name
-
      sharer = f_name + " " + l_name
+    end 
   end
 end

@@ -30,7 +30,11 @@
           <% end %>  
           <td><%= vehicle.construction.start_date.to_date %></td>
           <td><%= vehicle.construction.delivery_date.to_date %></td>
-          <td><%= Vehicle.get_sharer(vehicle)%></td>
+          <% unless Vehicle.get_sharer(vehicle).blank? %>
+            <td><%= Vehicle.get_sharer(vehicle)%></td>
+          <%else%>
+            <td>--Unshared--</td>
+          <% end %>  
           <td><%= link_to (image_tag("edit.ico",:width=>"14px",:height=>"14px",:title => "Edit Vehicle Details")), edit_vehicle_path(vehicle) %></td>
           <% if vehicle.construction.delivery_date.to_date > Time.now.to_date %>
             <td><%= image_tag("stop.ico", :width=>"16px",:height=>"16px",:id => "stop", :title => "Vehicle still under construction")
