@@ -11,8 +11,8 @@
             <th>Engine Model</th>
             <th>Power rating</th>
             <th>Fuel type</th>
-            <th style="text-align:center;">Delete</th>
             <th style="text-align:center;">Edit</th>
+            <th style="text-align:center;">Delete</th>
           </tr>
 
           <% @engines.each do |engine| %>
@@ -24,8 +24,8 @@
                 <td style="text-align:center;"><%= link_to (image_tag("edit.ico",:width=>"14px",:height=>"14px",:title => "Edit engine details")), edit_engine_path(engine) %></td>
                 <td style="text-align:center;"><%= link_to (image_tag("destroy.ico",:width=>"14px",:height=>"14px",:title => "Delete user")), engine, method: :delete, data: { confirm: 'Are you sure?' },:remote => true, :class => 'delete_engine' %></td>
               <% else %>
-                <td style="text-align:center;"><%= link_to (image_tag("stop.ico", :width=>"16px",:height=>"16px",:title=>"Can't delete, engine in use")) %></td>
                 <td style="text-align:center;"><%= link_to (image_tag("stop.ico", :width=>"16px",:height=>"16px",:title=>"Can't edit, engine in use")) %></td>
+                <td style="text-align:center;"><%= link_to (image_tag("stop.ico", :width=>"16px",:height=>"16px",:title=>"Can't delete, engine in use")) %></td>
               <% end %>
             </tr>
           <% end %>
