@@ -19,7 +19,7 @@
           <% if fuel.engines.blank?%>
             <td style="text-align:center;"><%= link_to (image_tag("destroy.png", :width=>"16px",:height=>"16px",:title=>"delete fuel type")), fuel, method: :delete, data: { confirm: 'Are you sure?' }, :remote => true, :class => "delete_fuel" %></td>
           <% else%>
-            <td style="text-align:center;"><%= link_to (image_tag("c_delete.png", :width=>"16px",:height=>"16px",:title=>"Fuel in usee, can't be deleted")) %></td>
+            <td style="text-align:center;"><%= link_to (image_tag("c_delete.png", :width=>"16px",:height=>"16px",:title=>"Fuel in use, can't be deleted")) %></td>
           </tr>
           <% end %>
       <% end %>
