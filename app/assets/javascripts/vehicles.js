@@ -74,8 +74,8 @@ $(document).ready(function() {
   });
 
   $(function() {
-    $( "#start_date" ).datepicker({ minDate: 0, maxDate: "+1M +10D",dateFormat: 'D, dd M yy' });
-    $( "#delivery_date" ).datepicker({ minDate: 0, maxDate: "+1M +10D",dateFormat: 'D, dd M yy' });
+    $( "#start_date" ).datepicker({ minDate: 0, maxDate: "+5Y +1M +10D",dateFormat: 'D, dd M yy' });
+    $( "#delivery_date" ).datepicker({ minDate: 0, maxDate: "+5Y +1M +10D",dateFormat: 'D, dd M yy' });
   });
 
   
